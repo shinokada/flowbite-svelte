@@ -1,5 +1,5 @@
 # Flowbite Svelte Documentation - Full Context
-# Generated on 2026-01-03T11:01:07.390Z
+# Generated on 2026-01-04T13:00:32.840Z
 # This file contains all documentation concatenated in logical order
 
 
