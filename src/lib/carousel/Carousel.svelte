@@ -110,9 +110,10 @@
 
   const onDragStart = (evt: MouseEvent | TouchEvent) => {
     if (disableSwipe) return;
-    /* eslint-disable  @typescript-eslint/no-unused-expressions */
     touchEvent = evt;
-    evt.cancelable && evt.preventDefault();
+    if (evt.cancelable) {
+      evt.preventDefault();
+    }
     const start = getPositionFromEvent(evt);
     const width = carouselDiv?.getBoundingClientRect().width;
     if (start === undefined || width === undefined) return;

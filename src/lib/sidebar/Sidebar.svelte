@@ -1,6 +1,6 @@
 <script lang="ts">
+  import type { Attachment } from "svelte/attachments";
   import type { SidebarContextType, SidebarProps } from "$lib/types";
-  import { trapFocus } from "$lib/utils/actions";
   import { getTheme } from "$lib/theme-provider/themeUtils";
   import clsx from "clsx";
   import { setSidebarContext, setActiveUrlContext } from "$lib/context";
@@ -85,9 +85,52 @@
 
   setSidebarContext(sidebarCtx);
 
-  // Handler for Escape key
-  const handleEscape = () => {
-    closeSidebar?.();
+  const trapFocusAttachment: Attachment<HTMLElement> = (node) => {
+    $effect(() => {
+      const shouldTrap = disableBreakpoints ? isOpen : !isLargeScreen && isOpen && !alwaysOpen;
+
+      if (!shouldTrap) return;
+
+      const previous = document.activeElement as HTMLElement | null;
+
+      function focusable(): HTMLElement[] {
+        return Array.from(node.querySelectorAll<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'));
+      }
+
+      function handleKeydown(event: KeyboardEvent) {
+        if (event.key === "Tab") {
+          const elements = focusable();
+          const first = elements[0];
+          const last = elements.at(-1);
+          const current = document.activeElement;
+
+          if (event.shiftKey && current === first) {
+            last?.focus();
+            event.preventDefault();
+          }
+
+          if (!event.shiftKey && current === last) {
+            first?.focus();
+            event.preventDefault();
+          }
+        }
+
+        if (event.key === "Escape") {
+          event.preventDefault();
+          closeSidebar?.();
+        }
+      }
+
+      const elements = focusable();
+      elements[0]?.focus();
+
+      node.addEventListener("keydown", handleKeydown);
+
+      return () => {
+        node.removeEventListener("keydown", handleKeydown);
+        previous?.focus({ preventScroll: true });
+      };
+    });
   };
 </script>
 
@@ -107,7 +150,7 @@
       {/if}
     {/if}
     <aside
-      use:trapFocus={!isLargeScreen && isOpen && !alwaysOpen ? { onEscape: closeSidebar ? handleEscape : undefined } : null}
+      {@attach trapFocusAttachment}
       transition:transition={!alwaysOpen ? transitionParams : undefined}
       {...restProps}
       data-scope="sidebar"
@@ -121,14 +164,7 @@
     </aside>
   {/if}
 {:else}
-  <aside
-    use:trapFocus={isOpen ? { onEscape: closeSidebar ? handleEscape : undefined } : null}
-    {...restProps}
-    data-scope="sidebar"
-    data-part="base"
-    class={base({ class: clsx(theme?.base, className) })}
-    aria-label={ariaLabel}
-  >
+  <aside {@attach trapFocusAttachment} {...restProps} data-scope="sidebar" data-part="base" class={base({ class: clsx(theme?.base, className) })} aria-label={ariaLabel}>
     <div data-part="content" class={content({ class: clsx(theme?.content, styling?.content) })}>
       {@render children()}
     </div>

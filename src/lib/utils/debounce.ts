@@ -1,50 +1,51 @@
 /**
  * Create a mutual debounce for two opposing actions.
- * Calling one action cancels any pending execution of the other.
+ * Calling either action cancels any pending execution (whether from actionA or actionB)
+ * and schedules the new action.
  *
  * @param actionA - First action (e.g., openDialog)
  * @param actionB - Second action (e.g., closeDialog)
- * @param delayFunc - Function returning delay in milliseconds (default: 300ms)
- * @returns Object with mutual debounce control methods
+ * @param delayFunc - Function returning delay in milliseconds
+ * @returns Tuple of debounced versions of [actionA, actionB]
  *
  * @example
  * const [openDialogDeb, closeDialogDeb] = createMutualDebounce(openDialog, closeDialog, () => 300);
  * openDialogDeb(); // Schedule open
- * closeDialogDeb(); // Cancel open, schedule close
+ * closeDialogDeb(); // Cancel pending open, schedule close
  */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Func = (...args: any[]) => unknown;
 
 export function createMutualDebounce<A extends Func, B extends Func>(actionA: A, actionB: B, delayFunc: () => number): [(...args: Parameters<A>) => void, (...args: Parameters<B>) => void] {
-  let rafId: number | null = null;
+  let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  function scheduleExecution(func: (...args: unknown[]) => unknown, args: unknown[], startTime: number): void {
-    rafId = requestAnimationFrame((currentTime) => {
-      const elapsed = currentTime - (startTime || 0);
-
-      if (elapsed < delayFunc()) return scheduleExecution(func, args, startTime);
-
-      rafId = null;
+  function scheduleExecution<F extends Func>(func: F, args: Parameters<F>): void {
+    // Note: cancel() is always called before this function by debouncedA/debouncedB,
+    // ensuring no duplicate timeouts exist. This design makes the calling code
+    // responsible for cleanup, which helps catch logic errors if used incorrectly.
+    const delay = Math.max(0, Number(delayFunc()) || 0);
+    timeoutId = setTimeout(() => {
+      timeoutId = null;
       func(...args);
-    });
+    }, delay);
   }
 
   function cancel(): void {
-    if (rafId !== null) {
-      cancelAnimationFrame(rafId);
-      rafId = null;
+    if (timeoutId !== null) {
+      clearTimeout(timeoutId);
+      timeoutId = null;
     }
   }
 
   const debouncedA = (...args: Parameters<A>): void => {
     cancel();
-    scheduleExecution(actionA, args as unknown[], performance.now());
+    scheduleExecution(actionA, args);
   };
 
   const debouncedB = (...args: Parameters<B>): void => {
     cancel();
-    scheduleExecution(actionB, args as unknown[], performance.now());
+    scheduleExecution(actionB, args);
   };
 
   return [debouncedA, debouncedB];

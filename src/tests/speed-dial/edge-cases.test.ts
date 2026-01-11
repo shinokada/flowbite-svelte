@@ -1,13 +1,14 @@
-import { cleanup, render, screen, act } from "@testing-library/svelte";
+import { cleanup, render, screen, waitFor } from "@testing-library/svelte";
 import { expect, test, afterEach, describe, vi, beforeEach } from "vitest";
 import userEvent from "@testing-library/user-event";
 
 import BasicSpeedDialTest from "./basic-speed-dial.test.svelte";
 import ButtonColorsTest from "./button-colors.test.svelte";
 import PropsVariationsTest from "./props-variations.test.svelte";
+import KeyboardAccessible from "./keyboard-accessible.test.svelte";
 
 beforeEach(() => {
-  vi.useFakeTimers();
+  vi.useFakeTimers({ shouldAdvanceTime: true });
 });
 
 afterEach(() => {
@@ -24,9 +25,8 @@ describe("SpeedDial - Edge Cases & Additional Scenarios", () => {
       const trigger = screen.getByTestId("color-trigger");
 
       await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
 
-      const shareButton = screen.getByRole("button", { name: /share/i });
+      const shareButton = await screen.findByRole("button", { name: /share/i });
       expect(shareButton).toBeInTheDocument();
       // Button should have color classes applied
       expect(shareButton.className).toBeTruthy();
@@ -34,17 +34,18 @@ describe("SpeedDial - Edge Cases & Additional Scenarios", () => {
 
     test("buttons with different colors render correctly", async () => {
       const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
-      const colors = ["primary", "blue", "green", "red", "yellow", "purple"];
+      const colors = ["primary", "blue", "green", "red", "yellow", "purple"] as const;
 
       for (const color of colors) {
         cleanup();
-        render(ButtonColorsTest, { color: color as string });
+        // Clear timers between iterations to prevent accumulation under fake timers
+        vi.clearAllTimers();
+        render(ButtonColorsTest, { color });
         const trigger = screen.getByTestId("color-trigger");
 
         await user.hover(trigger);
-        await act(() => vi.advanceTimersByTime(300));
 
-        const shareButton = screen.queryByRole("button", { name: /share/i });
+        const shareButton = await screen.findByRole("button", { name: /share/i });
         expect(shareButton).toBeInTheDocument();
       }
     });
@@ -65,9 +66,8 @@ describe("SpeedDial - Edge Cases & Additional Scenarios", () => {
       const trigger = screen.getByTestId("speed-dial-trigger");
 
       await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
 
-      const shareButton = screen.getByRole("button", { name: /share/i });
+      const shareButton = await screen.findByRole("button", { name: /share/i });
       expect(shareButton).toBeInTheDocument();
       expect(shareButton.className).toBeTruthy();
     });
@@ -97,9 +97,8 @@ describe("SpeedDial - Edge Cases & Additional Scenarios", () => {
       const trigger = screen.getByTestId("speed-dial-trigger");
 
       await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
 
-      const shareButton = screen.getByRole("button", { name: /share/i });
+      const shareButton = await screen.findByRole("button", { name: /share/i });
       const icon = shareButton.querySelector("svg");
 
       expect(icon).toBeInTheDocument();
@@ -128,9 +127,8 @@ describe("SpeedDial - Edge Cases & Additional Scenarios", () => {
       const trigger = screen.getByTestId("props-trigger");
 
       await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
 
-      const shareButton = screen.getByRole("button", { name: /share/i });
+      const shareButton = await screen.findByRole("button", { name: /share/i });
       const span = shareButton.querySelector("span:not(.sr-only)");
 
       expect(span).toBeInTheDocument();
@@ -150,9 +148,8 @@ describe("SpeedDial - Edge Cases & Additional Scenarios", () => {
       const trigger = screen.getByTestId("props-trigger");
 
       await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
 
-      const shareButton = screen.getByRole("button", { name: /share/i });
+      const shareButton = await screen.findByRole("button", { name: /share/i });
       const srSpan = shareButton.querySelector("span.sr-only");
 
       expect(srSpan).toBeInTheDocument();
@@ -160,11 +157,10 @@ describe("SpeedDial - Edge Cases & Additional Scenarios", () => {
 
       // Hover button to show tooltip
       await user.hover(shareButton);
-      await act(() => vi.advanceTimersByTime(300));
 
-      // Tooltip should appear
-      const shareTexts = screen.getAllByText(/share/i);
-      expect(shareTexts.length).toBeGreaterThan(1);
+      await waitFor(() => expect(screen.getByRole("tooltip")).toBeInTheDocument());
+      const tooltip = screen.getByRole("tooltip");
+      expect(tooltip).toHaveTextContent(/share/i);
     });
   });
 
@@ -172,18 +168,30 @@ describe("SpeedDial - Edge Cases & Additional Scenarios", () => {
     test("speed dial works with different viewport sizes", async () => {
       const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
 
-      // Simulate mobile viewport using window
-      window.innerWidth = 375;
-      window.innerHeight = 667;
-      window.dispatchEvent(new Event("resize"));
+      // Use vi.stubGlobal for more reliable viewport simulation
+      // This works consistently across browser and JSDOM environments
+      const restore = () => {
+        vi.unstubAllGlobals();
+        window.dispatchEvent(new Event("resize"));
+      };
 
-      render(BasicSpeedDialTest);
-      const trigger = screen.getByTestId("speed-dial-trigger");
+      try {
+        // Simulate mobile viewport
+        vi.stubGlobal("innerWidth", 375);
+        vi.stubGlobal("innerHeight", 667);
+        window.dispatchEvent(new Event("resize"));
 
-      await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
+        render(BasicSpeedDialTest);
+        const trigger = screen.getByTestId("speed-dial-trigger");
 
-      expect(screen.queryByRole("button", { name: /share/i })).toBeInTheDocument();
+        await user.hover(trigger);
+
+        const shareButton = await screen.findByRole("button", { name: /share/i });
+        expect(shareButton).toBeInTheDocument();
+      } finally {
+        // Restore original window dimensions to prevent cross-test leaks
+        restore();
+      }
     });
 
     test("trigger button is appropriately sized", () => {
@@ -204,9 +212,7 @@ describe("SpeedDial - Edge Cases & Additional Scenarios", () => {
       // Rapid operations
       for (let i = 0; i < 5; i++) {
         await user.hover(trigger);
-        await act(() => vi.advanceTimersByTime(100));
         await user.unhover(trigger);
-        await act(() => vi.advanceTimersByTime(100));
       }
 
       // Should not throw errors
@@ -219,9 +225,8 @@ describe("SpeedDial - Edge Cases & Additional Scenarios", () => {
       const trigger = screen.getByTestId("speed-dial-trigger");
 
       await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
 
-      const shareButton = screen.getByRole("button", { name: /share/i });
+      const shareButton = await screen.findByRole("button", { name: /share/i });
 
       // Multiple rapid clicks
       await user.click(shareButton);
@@ -236,38 +241,48 @@ describe("SpeedDial - Edge Cases & Additional Scenarios", () => {
   describe("Accessibility Edge Cases", () => {
     test("speed dial works without mouse interactions", async () => {
       const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
-      render(BasicSpeedDialTest);
+      render(KeyboardAccessible);
 
       // Tab to trigger
       await user.tab();
       const trigger = screen.getByTestId("speed-dial-trigger");
       expect(trigger).toHaveFocus();
 
-      // Hover should still work
-      await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
+      // Click to open SpeedDial (trigger="click")
+      await user.click(trigger);
 
-      expect(screen.queryByRole("button", { name: /share/i })).toBeInTheDocument();
+      // Now buttons should be in the document
+      const shareButton = await screen.findByRole("button", { name: /share/i });
+      expect(shareButton).toBeInTheDocument();
     });
 
     test("all interactive elements are keyboard accessible", async () => {
       const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
-      render(BasicSpeedDialTest);
+      render(KeyboardAccessible);
 
       const trigger = screen.getByTestId("speed-dial-trigger");
-      trigger.focus();
-      await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
+
+      // Open using click
+      await user.click(trigger);
+
+      // Wait for buttons to appear after popper positioning
+      const shareButton = await screen.findByRole("button", { name: /share/i });
+      const printButton = await screen.findByRole("button", { name: /print/i });
+      const downloadButton = await screen.findByRole("button", { name: /download/i });
+
+      expect(shareButton).toBeInTheDocument();
+      expect(printButton).toBeInTheDocument();
+      expect(downloadButton).toBeInTheDocument();
 
       // Tab through all buttons
       await user.tab();
-      expect(screen.getByRole("button", { name: /share/i })).toHaveFocus();
+      expect(shareButton).toHaveFocus();
 
       await user.tab();
-      expect(screen.getByRole("button", { name: /print/i })).toHaveFocus();
+      expect(printButton).toHaveFocus();
 
       await user.tab();
-      expect(screen.getByRole("button", { name: /download/i })).toHaveFocus();
+      expect(downloadButton).toHaveFocus();
     });
   });
 });

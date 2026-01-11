@@ -1980,6 +1980,7 @@ export interface TriggeredToggleEvent extends ToggleEvent {
 }
 
 export interface PopperProps extends Omit<HTMLAttributes<HTMLDivElement>, "onbeforetoggle" | "ontoggle" | "onclose" | "color"> {
+  disableTransitions?: boolean;
   triggeredBy?: string;
   triggerDelay?: number;
   trigger?: "hover" | "click";
@@ -2217,4 +2218,6 @@ export interface ClipboardManagerProps extends ClipboardManagerVariants {
 }
 
 // theme-selector
-export interface ThemeSelectorProps extends ThemeSelectorVariants, HTMLAttributes<HTMLDivElement> {}
+export interface ThemeSelectorProps extends ThemeSelectorVariants, HTMLAttributes<HTMLDivElement> {
+  loadFromStatic?: boolean;
+}

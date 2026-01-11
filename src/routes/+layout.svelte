@@ -10,9 +10,9 @@
   // Get the saved theme from localStorage (or default)
   const savedTheme = getCurrentTheme();
 
-  // Load the theme as early as possible
+  // choose true for loadFromStatic
   onMount(() => {
-    loadTheme(savedTheme);
+    loadTheme(savedTheme, true);
   });
 </script>
 

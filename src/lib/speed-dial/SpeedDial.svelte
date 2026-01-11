@@ -24,16 +24,17 @@
 
   const theme = $derived(getTheme("speedDial"));
 
-  $effect(() => {
-    setSpeedDialContext({ pill, tooltip, textOutside });
-  });
+  // Set context wrapped in a function for reactivity
+  const contextValue = () => ({ pill, tooltip, textOutside });
+
+  setSpeedDialContext(contextValue);
 
   let vertical: boolean = $derived(getSideAxis(placement) === "y");
 
   let { base, popper } = $derived(speedDial({ vertical }));
 </script>
 
-<Popper {...restProps} bind:isOpen {trigger} arrow={false} {placement} class={base({ class: clsx(theme?.base, className) })}>
+<Popper {...restProps} bind:isOpen {trigger} arrow={false} {placement} role="menu" class={base({ class: clsx(theme?.base, className) })}>
   <div class={popper({ class: clsx(theme?.popper, styling?.popper) })}>
     {@render children()}
   </div>

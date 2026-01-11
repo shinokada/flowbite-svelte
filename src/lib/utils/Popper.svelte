@@ -29,6 +29,7 @@
     isOpen = $bindable(false),
     transitionParams,
     transition = fade,
+    disableTransitions = false,
     onbeforetoggle,
     ontoggle,
     onclose,
@@ -44,13 +45,16 @@
   let invoker: HTMLElement | null = null;
   let referenceElement: HTMLElement | null = null;
   let triggerEls: HTMLElement[] = [];
-  let arrowParams = $state<{ placement: Placement; cords: Partial<Coords> }>({ placement: "top", cords: { x: 0, y: 0 } });
+  let arrowCoords = $state<Partial<Coords>>({ x: 0, y: 0 });
+  let arrowPlacement = $derived<Placement>(placement);
+
+  // Update arrowPlacement when placement prop changes
   $effect(() => {
-    arrowParams = {
-      placement,
-      cords: { x: 0, y: 0 }
-    };
+    arrowPlacement = placement;
   });
+
+  // Derived arrow params instead of effect
+  const arrowParams = $derived({ placement: arrowPlacement, cords: arrowCoords });
 
   $effect(() => {
     if (reference && popover) {
@@ -73,11 +77,9 @@
 
   const paramsDefault = { duration: 100, easing: sineIn };
 
-  // Check if running in browser to avoid SSR issues
-  const isBrowser = typeof window !== "undefined";
-
-  // Respect reduced motion preference by setting duration to 0
-  const effectiveParams = $derived(isBrowser && prefersReducedMotion.current ? { ...(transitionParams ?? paramsDefault), duration: 0 } : (transitionParams ?? paramsDefault));
+  const effectiveParams = $derived(
+    disableTransitions || (typeof window !== "undefined" && prefersReducedMotion.current) ? { ...(transitionParams ?? paramsDefault), duration: 0 } : (transitionParams ?? paramsDefault)
+  );
 
   const px = (n: number | undefined) => (n ? `${n}px` : "");
 
@@ -90,7 +92,8 @@
       if (popover) {
         Object.assign(popover.style, { position: strategy, left: yOnly ? "0" : px(x), right: "auto", top: px(y) });
         if (arrow && arrowEl) {
-          arrowParams = { placement: pl, cords: { x: arrow.x, y: arrow.y } };
+          arrowPlacement = pl;
+          arrowCoords = { x: arrow.x, y: arrow.y };
         }
       }
     });
@@ -102,7 +105,6 @@
     if (ev.target !== invoker && triggerEls.includes(ev.target as HTMLElement)) {
       invoker = ev.target as HTMLElement;
       if (isOpen) {
-        // invoker changed but the popover is open and stays open; pretend as if it toggles
         popover?.dispatchEvent(new ToggleEvent("beforetoggle", { newState: "open", oldState: "open" }));
         await updatePopoverPosition();
         popover?.dispatchEvent(new ToggleEvent("toggle", { newState: "open", oldState: "open" }));
@@ -117,22 +119,18 @@
   }
 
   async function _close_popover(ev: Event) {
-    // For click triggers, don't close on focusout events from inside the popover
     if (trigger === "click" && ev.type === "focusout") {
       const relatedTarget = (ev as FocusEvent).relatedTarget as HTMLElement;
 
-      // If focus is moving to somewhere inside the popover, don't close
       if (popover && relatedTarget && popover.contains(relatedTarget)) {
         return;
       }
 
-      // If focus is moving to nowhere (like when clicking), don't close for click triggers
       if (!relatedTarget) {
         return;
       }
     }
 
-    // if popover has focus don't close when leaving the invoker
     if (ev?.type === "mouseleave" && popover?.contains(popover.ownerDocument.activeElement)) {
       return;
     }
@@ -152,30 +150,7 @@
   }
 
   $effect(() => {
-    // Ensure popover is shown/hidden based on isOpen state
-    if (popover) {
-      if (isOpen) {
-        try {
-          if (!popover.matches(":popover-open")) {
-            popover.showPopover();
-          }
-        } catch (e) {
-          // Ignore errors
-        }
-      } else {
-        try {
-          if (popover.matches(":popover-open")) {
-            popover.hidePopover();
-          }
-        } catch (e) {
-          // Ignore errors
-        }
-      }
-    }
-  });
-
-  $effect(() => {
-    // Floating UI instance when it's closed we need to keep a autoUpdate destroy function
+    // Floating UI instance
     let autoUpdateDestroy: (() => void) | null = null;
 
     if (isOpen && popover && invoker) {
@@ -225,14 +200,13 @@
     else if (node.parentElement) triggerEls = [node.parentElement];
 
     if (!triggerEls.length) {
-      console.error("No triggers found.", triggeredBy);
       return;
     }
 
     invoker = triggerEls[0];
 
     triggerEls.forEach((element: HTMLElement) => {
-      if (element.tabIndex < 0) element.tabIndex = 0; // trigger must be focusable
+      if (element.tabIndex < 0) element.tabIndex = 0;
       for (const [name, handler, cond] of events) if (cond) element.addEventListener(name, handler);
     });
 
@@ -246,7 +220,6 @@
   function closeOnEscape(event: KeyboardEvent) {
     if (event.key === "Escape") {
       isOpen = false;
-      // Return focus to the trigger element when closing with escape
       invoker?.focus();
     }
   }
@@ -261,7 +234,6 @@
     const isClickInsidePopover = clickPath.includes(popover);
     const isClickOnTrigger = triggerEls.some((el) => clickPath.includes(el));
 
-    // Only close if click is outside both popover and trigger elements
     if (!isClickInsidePopover && !isClickOnTrigger) {
       close_popover(event);
       isOpen = false;
@@ -284,7 +256,12 @@
     onmouseenter={hoverable ? open_popover : undefined}
     class={clsx(className)}
     transition:transition={effectiveParams as ParamsType}
-    onintrostart={() => popover?.showPopover()}
+    onintrostart={() => {
+      popover?.showPopover?.();
+    }}
+    onoutroend={() => {
+      popover?.hidePopover();
+    }}
     onbeforetoggle={on_before_toggle}
     ontoggle={on_toggle}
     {...restProps}
@@ -312,7 +289,7 @@
 @prop strategy = "absolute"
 @prop role = "tooltip"
 @prop reference
-@prop middlewares = [dom.flip(), dom.shift()]
+@prop middlewares = [dom.flip(), dom.shift()],
 @prop class: className = ""
 @prop arrowClass
 @prop isOpen = $bindable(false)

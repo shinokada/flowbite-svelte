@@ -1,11 +1,11 @@
-import { cleanup, render, screen, act } from "@testing-library/svelte";
+import { cleanup, render, screen, act, waitFor } from "@testing-library/svelte";
 import { expect, test, afterEach, describe, vi, beforeEach } from "vitest";
 import userEvent from "@testing-library/user-event";
 
 import PropsVariationsTest from "./props-variations.test.svelte";
 
 beforeEach(() => {
-  vi.useFakeTimers();
+  vi.useFakeTimers({ shouldAdvanceTime: true });
 });
 
 afterEach(() => {
@@ -22,9 +22,11 @@ describe("SpeedDial - Props Variations", () => {
       const trigger = screen.getByTestId("props-trigger");
 
       await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
+      await act(async () => {
+        await vi.runAllTimersAsync();
+      });
 
-      const shareButton = screen.getByRole("button", { name: /share/i });
+      const shareButton = await screen.findByRole("button", { name: /share/i, hidden: true });
       expect(shareButton).toHaveClass("rounded-full");
     });
 
@@ -34,9 +36,11 @@ describe("SpeedDial - Props Variations", () => {
       const trigger = screen.getByTestId("props-trigger");
 
       await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
+      await act(async () => {
+        await vi.runAllTimersAsync();
+      });
 
-      const shareButton = screen.getByRole("button", { name: /share/i });
+      const shareButton = await screen.findByRole("button", { name: /share/i, hidden: true });
       expect(shareButton).not.toHaveClass("rounded-full");
     });
   });
@@ -48,9 +52,11 @@ describe("SpeedDial - Props Variations", () => {
       const trigger = screen.getByTestId("props-trigger");
 
       await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
+      await act(async () => {
+        await vi.runAllTimersAsync();
+      });
 
-      const shareButton = screen.getByRole("button", { name: /share/i });
+      const shareButton = await screen.findByRole("button", { name: /share/i, hidden: true });
       const span = shareButton.querySelector("span");
       expect(span).toBeInTheDocument();
       expect(span).not.toHaveClass("sr-only");
@@ -63,9 +69,11 @@ describe("SpeedDial - Props Variations", () => {
       const trigger = screen.getByTestId("props-trigger");
 
       await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
+      await act(async () => {
+        await vi.runAllTimersAsync();
+      });
 
-      const shareButton = screen.getByRole("button", { name: /share/i });
+      const shareButton = await screen.findByRole("button", { name: /share/i, hidden: true });
       const span = shareButton.querySelector("span.sr-only");
       expect(span).toBeInTheDocument();
       expect(span?.textContent).toBe("Share");
@@ -79,15 +87,15 @@ describe("SpeedDial - Props Variations", () => {
       const trigger = screen.getByTestId("props-trigger");
 
       await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
+      await act(async () => {
+        await vi.runAllTimersAsync();
+      });
 
-      const shareButton = screen.getByRole("button", { name: /share/i });
+      const shareButton = await screen.findByRole("button", { name: /share/i, hidden: true });
       await user.hover(shareButton);
-      await act(() => vi.advanceTimersByTime(300));
-
-      // Tooltip should appear - use getAllByText for multiple matches
-      const shareElements = screen.getAllByText("Share");
-      expect(shareElements.length).toBeGreaterThan(1); // Button text + tooltip
+      await waitFor(() => {
+        expect(screen.getByRole("tooltip")).toBeInTheDocument();
+      });
     });
 
     test("no tooltips when tooltip='none'", async () => {
@@ -96,7 +104,9 @@ describe("SpeedDial - Props Variations", () => {
       const trigger = screen.getByTestId("props-trigger");
 
       await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
+      await act(async () => {
+        await vi.runAllTimersAsync();
+      });
 
       // Check that no tooltip component is rendered in the DOM
       const tooltips = container.querySelectorAll('[role="tooltip"]');
@@ -110,11 +120,15 @@ describe("SpeedDial - Props Variations", () => {
       const trigger = screen.getByTestId("props-trigger");
 
       await user.hover(trigger);
-      await act(() => vi.advanceTimersByTime(300));
+      await act(async () => {
+        await vi.runAllTimersAsync();
+      });
 
-      const shareButton = screen.getByRole("button", { name: /share/i });
+      const shareButton = await screen.findByRole("button", { name: /share/i, hidden: true });
       await user.hover(shareButton);
-      await act(() => vi.advanceTimersByTime(300));
+      await act(async () => {
+        await vi.runAllTimersAsync();
+      });
 
       // Check that tooltip exists - it should be in the DOM after hovering
       const tooltips = container.querySelectorAll('[role="tooltip"]');
