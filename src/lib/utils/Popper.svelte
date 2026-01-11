@@ -289,12 +289,13 @@
 @prop strategy = "absolute"
 @prop role = "tooltip"
 @prop reference
-@prop middlewares = [dom.flip(), dom.shift()],
+@prop middlewares = [dom.flip(), dom.shift()]
 @prop class: className = ""
 @prop arrowClass
 @prop isOpen = $bindable(false)
 @prop transitionParams
 @prop transition = fade
+@prop disableTransitions = false
 @prop onbeforetoggle
 @prop ontoggle
 @prop onclose

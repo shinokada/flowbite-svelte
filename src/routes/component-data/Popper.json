@@ -21,6 +21,7 @@
     ["isOpen", "$bindable(false)"],
     ["transitionParams", ""],
     ["transition", "fade"],
+    ["disableTransitions", "false"],
     ["onbeforetoggle", ""],
     ["ontoggle", ""],
     ["onclose", ""],

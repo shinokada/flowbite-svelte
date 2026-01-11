@@ -66,9 +66,9 @@
 @component
 [Go to docs](https://flowbite-svelte.com/)
 ## Type
-[ThemeSelectorProps](https://github.com/themesberg/flowbite-svelte/blob/main/src/lib/types.ts#L2220)
+[ThemeSelectorProps](https://github.com/themesberg/flowbite-svelte/blob/main/src/lib/types.ts#L2221)
 ## Props
 @prop classes
-@prop loadFromStatic - If true, loads theme CSS files from /static/themes directory instead of bundled assets
+@prop loadFromStatic = false
 @prop ...restProps
 -->
