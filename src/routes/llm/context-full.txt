@@ -1,5 +1,5 @@
 # Flowbite Svelte Documentation - Full Context
-# Generated on 2026-01-12T03:04:48.012Z
+# Generated on 2026-01-12T11:52:39.239Z
 # This file contains all documentation concatenated in logical order
 
 
@@ -1421,7 +1421,7 @@ Here's an example of how to use the `multiple` option together with "expand all"
 
 ## Custom transitions
 
-The default transition of `AccordionItem`s is <A href="https://svelte.dev/docs#run-time-svelte-transition-slide">slide</A>. Use the `transitionType` and `transitionParams` prop to create custom transitions.
+The default transition of `AccordionItem`s is <A href="https://svelte.dev/docs#run-time-svelte-transition-slide">slide</A>. Use the `transition` and `transitionParams` prop to create custom transitions.
 
 You can use any Svelte transition function such as `fade`, `blur`, `fly`, or `scale` from the `svelte/transition` module, and customize them with parameters like duration and easing.
 
@@ -1436,11 +1436,11 @@ You can use any Svelte transition function such as `fade`, `blur`, `fly`, or `sc
     {#snippet header()}Slide duration:1000{/snippet}
     <p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo ab necessitatibus sint explicabo ...</p>
   </AccordionItem>
-  <AccordionItem transitionType={blur} transitionParams={{ duration: 300 }}>
+  <AccordionItem transition={blur} transitionParams={{ duration: 300 }}>
     {#snippet header()}Blur duration:300{/snippet}
     <p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo ab necessitatibus sint explicabo ...</p>
   </AccordionItem>
-  <AccordionItem transitionType={fade} transitionParams={{ duration: 300 }}>
+  <AccordionItem transition={fade} transitionParams={{ duration: 300 }}>
     {#snippet header()}Fade duration:300{/snippet}
     <p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo ab necessitatibus sint explicabo ...</p>
   </AccordionItem>
@@ -1537,9 +1537,9 @@ To test: Fill out the form, navigate to a different page, and then use your brow
 </Accordion>
 ```
 
-## Using transitionType="none"
+## Using transition="none"
 
-When you set `transitionType="none"` on an Accordion or an AccordionItem, it disables Svelte transitions completely and instead uses CSS display properties (block/hidden) to show or hide content. This prevents Svelte from destroying and recreating components when toggling the accordion.
+When you set `transition="none"` on an Accordion or an AccordionItem, it disables Svelte transitions completely and instead uses CSS display properties (block/hidden) to show or hide content. This prevents Svelte from destroying and recreating components when toggling the accordion.
 
 This approach is useful when:
 - You want to preserve form state or component lifecycle
@@ -1551,7 +1551,7 @@ This approach is useful when:
   import { AccordionItem, Accordion } from "flowbite-svelte";
 </script>
 
-<Accordion transitionType="none">
+<Accordion transition="none">
   <AccordionItem>
     {#snippet header()}My Header 1{/snippet}
     Content A
@@ -1563,12 +1563,12 @@ This approach is useful when:
 </Accordion>
 
 <Accordion>
-  <AccordionItem transitionType="none">
-    {#snippet header()}transitionType: "none"{/snippet}
+  <AccordionItem transition="none">
+    {#snippet header()}transition: "none"{/snippet}
     Content C
   </AccordionItem>
   <AccordionItem>
-    {#snippet header()}transitionType: default{/snippet}
+    {#snippet header()}transition: default{/snippet}
     Content D
   </AccordionItem>
 </Accordion>
@@ -1725,7 +1725,7 @@ Combining multiple responsive patterns for sophisticated adaptive layouts:
 
 - `multiple`: Allow multiple items open simultaneously (default: `false`)
 - `flush`: Remove rounded borders for minimal design
-- `transitionType`: Control transitions (`TransitionFunc` or `"none"`)
+- `transition`: Control transitions (`TransitionFunc` or `"none"`)
 - `classes`: Customize styling with `active`, `inactive`, `button`, `contentWrapper`, `content` properties
 
 ### AccordionItem
@@ -1733,7 +1733,7 @@ Combining multiple responsive patterns for sophisticated adaptive layouts:
 - `open`: Control open state (bindable)
 - `header`: Snippet for header content
 - `arrowup` / `arrowdown`: Snippets for custom icons
-- `transitionType`: Override parent transition (`TransitionFunc` or `"none"`)
+- `transition`: Override parent transition (`TransitionFunc` or `"none"`)
 - `transitionParams`: Custom transition parameters
 - `classes`: Item-specific styling overrides
 
@@ -1767,7 +1767,7 @@ The Accordion component is built with accessibility in mind:
 - flush
 - multiple: false
 - class: className
-- transitionType
+- transition
 - respectReducedMotion: true
 - classes
 
@@ -1784,7 +1784,7 @@ The Accordion component is built with accessibility in mind:
 - arrowup
 - arrowdown
 - open: $bindable(false)
-- transitionType: slide
+- transition: slide
 - transitionParams
 - class: className
 - classes
@@ -1993,7 +1993,7 @@ Enable dismissal for temporary messages like notices or one-time tips. Customize
   <a href="/" class="font-semibold underline hover:text-green-800 dark:hover:text-green-900">example link</a>
   . Give it a click if you like.
 </Alert>
-<Alert color="warning" dismissable transition={fly} params={{ x: 200 }}>
+<Alert color="warning" dismissable transition={fly} transitionParams={{ x: 200 }}>
   {#snippet icon()}<InfoCircleSolid class="h-5 w-5" />{/snippet}
   An alert with non default animation - fly away.
 </Alert>
@@ -2179,7 +2179,7 @@ Handle dismissal interactions with the `onclick` event to track dismissals, save
 - class: className
 - dismissable
 - transition: fade
-- params
+- transitionParams
 - listContent
 - borderAccent
 - closeButtonProps
@@ -2946,7 +2946,7 @@ The Badge component follows accessibility best practices:
 - target
 - rounded
 - transition: fade
-- params
+- transitionParams
 - closeButtonProps
 
 
@@ -3134,7 +3134,7 @@ Choose transitions that match your site's overall animation style and don't dist
 <Skeleton class="py-4" />
 <ImagePlaceholder class="py-4" />
 
-<Banner transition={slide} {params} class="absolute">
+<Banner transition={slide} transitionParams={params} class="absolute">
   <p class="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
     <span class="me-3 inline-flex rounded-full bg-gray-200 p-1 dark:bg-gray-600">
       <BullhornSolid class="h-3 w-3 text-gray-500 dark:text-gray-400" />
@@ -3260,7 +3260,7 @@ The Banner component follows accessibility best practices:
 - class: className
 - classes
 - transition: fade
-- params
+- transitionParams
 - onclose
 - closeButtonProps
 
@@ -12693,7 +12693,7 @@ Use this example to show a responsive list of menu items inside the sidebar with
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -12769,7 +12769,7 @@ Utilize the `href` prop within the `SidebarItem` component to incorporate a hype
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     classes={{ nonactive: nonActiveClass, active: activeClass }}
     position="absolute"
     class="z-50 h-full"
@@ -12843,7 +12843,7 @@ Control the `active` and `nonactive` class by using `activeClass` and `nonActive
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     position="absolute"
     classes={{ nonactive: nonActiveClass, active: activeClass }}
     class="z-50 h-full"
@@ -12917,7 +12917,7 @@ You can control icon class by changing the `class` prop in the `Icon` component.
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -12999,7 +12999,7 @@ Use this sidebar example to create multi-level menu items by using the SidebarDr
     isOpen={isDemoOpen}
     isSingle={false}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
     class="z-50 h-full"
@@ -13096,7 +13096,7 @@ You can change the icons using `arrowup` and `arrowdown` slots.
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     position="absolute"
     class="z-50 h-full"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -13164,7 +13164,7 @@ Separate the content inside the sidebar component by applying a border separator
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -13255,7 +13255,7 @@ Use this example to add a CTA button inside the sidebar component and encourage 
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -13349,7 +13349,7 @@ Show the logo of your brand and link back to the homepage from the top part of t
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -13425,7 +13425,7 @@ The following example shows how to use children for your branding.
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -13508,7 +13508,7 @@ Use the following example to show a close button in the sidebar for a small scre
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full pt-6"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -13607,7 +13607,7 @@ You can use object for the sidebar items as the following example.
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -13667,7 +13667,7 @@ The following example shows to open only one dropdown when you click another dro
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
     class="z-50 h-full"
@@ -13747,7 +13747,7 @@ To open all dropdown menus, set `isSingle={false}`.
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
     class="z-50 h-full"
@@ -13832,7 +13832,7 @@ You can add own transition by setting `transition` and `params` to `SidebarDropd
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
     class="z-50 h-full"
@@ -13843,7 +13843,7 @@ You can add own transition by setting `transition` and `params` to `SidebarDropd
           <ChartOutline class="h-5 w-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
         {/snippet}
       </SidebarItem>
-      <SidebarDropdownWrapper label="E-commerce" classes={{ trigger: "p-2" }} transition={fade} {params}>
+      <SidebarDropdownWrapper label="E-commerce" classes={{ trigger: "p-2" }} transition={fade} transitionParams={params}>
         {#snippet icon()}
           <ShoppingBagSolid class="h-5 w-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
         {/snippet}
@@ -13925,7 +13925,7 @@ You can add own transition by setting `transition` and `params` to `SidebarDropd
         backdrop={false}
         isOpen={isDemoOpen}
         closeSidebar={closeDemoSidebar}
-        params={{ x: -50, duration: 50 }}
+        transitionParams={{ x: -50, duration: 50 }}
         class="z-50"
         position="static"
         classes={{ nonactive: "p-2", active: "p-2" }}
@@ -14030,7 +14030,7 @@ You can add own transition by setting `transition` and `params` to `SidebarDropd
 - activateClickOutside: true
 - backdrop: true
 - transition: fly
-- params
+- transitionParams
 - ariaLabel
 - activeUrl: ""
 - class: className
@@ -14091,7 +14091,7 @@ You can add own transition by setting `transition` and `params` to `SidebarDropd
 - isOpen: $bindable()
 - label
 - transition: slide
-- params
+- transitionParams
 - class: className
 - classes
 - onclick
@@ -18657,7 +18657,7 @@ Use the following example with `ToastContainer` to stack toasts vertically on th
 
 <ToastContainer position="top-right">
   {#each toasts as toast (toast.id)}
-    <Toast color={toast.color} dismissable={true} transition={fly} params={{ x: 200, duration: 800 }} class="w-64" onclose={handleClose(toast.id)} bind:toastStatus={toast.visible}>
+    <Toast color={toast.color} dismissable={true} transition={fly} transitionParams={{ x: 200, duration: 800 }} class="w-64" onclose={handleClose(toast.id)} bind:toastStatus={toast.visible}>
       {toast.message}
     </Toast>
   {/each}
@@ -18864,14 +18864,14 @@ You can use one of <A href="https://svelte.dev/docs#run-time-svelte-easing" targ
   Transition type: slide
 </Toast>
 
-<Toast transition={scale} params={{ delay: 250, duration: 300, easing: quintOut }}>
+<Toast transition={scale} transitionParams={{ delay: 250, duration: 300, easing: quintOut }}>
   {#snippet icon()}
     <CheckCircleSolid class="h-6 w-6" />
   {/snippet}
   Transition type: scale, delay: 250, duration: 300, easing: quintOut
 </Toast>
 
-<Toast params={{ delay: 250, duration: 1000 }}>
+<Toast transitionParams={{ delay: 250, duration: 1000 }}>
   {#snippet icon()}
     <CheckCircleSolid class="h-6 w-6" />
   {/snippet}
@@ -18888,14 +18888,14 @@ You can use one of <A href="https://svelte.dev/docs#run-time-svelte-easing" targ
   import { BellOutline } from "flowbite-svelte-icons";
 </script>
 
-<Toast transition={blur} color="purple" params={{ amount: 10 }} class="mb-4">
+<Toast transition={blur} color="purple" transitionParams={{ amount: 10 }} class="mb-4">
   {#snippet icon()}
     <BellOutline class="h-6 w-6" />
   {/snippet}
   Transition type: blur, amount: 10
 </Toast>
 
-<Toast transition={blur} color="purple" params={{ amount: 50, delay: 1000 }}>
+<Toast transition={blur} color="purple" transitionParams={{ amount: 50, delay: 1000 }}>
   {#snippet icon()}
     <BellOutline class="h-6 w-6" />
   {/snippet}
@@ -18912,14 +18912,14 @@ You can use one of <A href="https://svelte.dev/docs#run-time-svelte-easing" targ
   import { DownloadOutline } from "flowbite-svelte-icons";
 </script>
 
-<Toast transition={fly} params={{ x: 200 }} color="green" class="mb-4">
+<Toast transition={fly} transitionParams={{ x: 200 }} color="green" class="mb-4">
   {#snippet icon()}
     <DownloadOutline class="h-6 w-6" />
   {/snippet}
   Transition type: fly right
 </Toast>
 
-<Toast transition={fly} params={{ y: 200 }} color="green">
+<Toast transition={fly} transitionParams={{ y: 200 }} color="green">
   {#snippet icon()}
     <DownloadOutline class="h-6 w-6" />
   {/snippet}
@@ -19063,7 +19063,7 @@ The Toast component extends `HTMLAttributes<HTMLDivElement>`, allowing you to us
 - color: "primary"
 - position
 - align: true
-- params
+- transitionParams
 - transition: fly
 - class: className
 - classes
@@ -22844,7 +22844,7 @@ Get started with the default toggle component example as a checkbox element to r
 
 <MultiSelect items={colorCountries} value={preselected}>
   {#snippet children({ item, clear })}
-    <Badge color={item.color} dismissable params={{ duration: 100 }} onclose={clear} class="mx-0.5">
+    <Badge color={item.color} dismissable transitionParams={{ duration: 100 }} onclose={clear} class="mx-0.5">
       {item.name}
     </Badge>
   {/snippet}
@@ -22877,7 +22877,7 @@ Remember to connect the `clear` snippet's prop to trigger option removal.
 
 <MultiSelect items={countries} value={selected}>
   {#snippet children({ item, clear })}
-    <Badge color={item.color} dismissable params={{ duration: 100 }} onclose={clear} class="mx-0.5">
+    <Badge color={item.color} dismissable transitionParams={{ duration: 100 }} onclose={clear} class="mx-0.5">
       {item.name}
     </Badge>
   {/snippet}

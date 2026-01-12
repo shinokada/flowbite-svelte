@@ -374,7 +374,7 @@ The Badge component follows accessibility best practices:
 - target
 - rounded
 - transition: fade
-- params
+- transitionParams
 - closeButtonProps
 
 

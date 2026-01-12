@@ -12,7 +12,7 @@
     ["color", "\"primary\""],
     ["position", ""],
     ["align", "true"],
-    ["params", ""],
+    ["transitionParams", ""],
     ["transition", "fly"],
     ["class: className", ""],
     ["classes", ""],

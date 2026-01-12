@@ -14,7 +14,7 @@
     ["class: className", ""],
     ["classes", ""],
     ["transition", "fade"],
-    ["params", ""],
+    ["transitionParams", ""],
     ["onclose", ""],
     ["closeButtonProps", ""]
   ]

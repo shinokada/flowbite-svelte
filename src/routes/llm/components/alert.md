@@ -193,7 +193,7 @@ Enable dismissal for temporary messages like notices or one-time tips. Customize
   <a href="/" class="font-semibold underline hover:text-green-800 dark:hover:text-green-900">example link</a>
   . Give it a click if you like.
 </Alert>
-<Alert color="warning" dismissable transition={fly} params={{ x: 200 }}>
+<Alert color="warning" dismissable transition={fly} transitionParams={{ x: 200 }}>
   {#snippet icon()}<InfoCircleSolid class="h-5 w-5" />{/snippet}
   An alert with non default animation - fly away.
 </Alert>
@@ -379,7 +379,7 @@ Handle dismissal interactions with the `onclick` event to track dismissals, save
 - class: className
 - dismissable
 - transition: fade
-- params
+- transitionParams
 - listContent
 - borderAccent
 - closeButtonProps

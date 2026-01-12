@@ -41,7 +41,7 @@ Use this example to show a responsive list of menu items inside the sidebar with
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -117,7 +117,7 @@ Utilize the `href` prop within the `SidebarItem` component to incorporate a hype
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     classes={{ nonactive: nonActiveClass, active: activeClass }}
     position="absolute"
     class="z-50 h-full"
@@ -191,7 +191,7 @@ Control the `active` and `nonactive` class by using `activeClass` and `nonActive
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     position="absolute"
     classes={{ nonactive: nonActiveClass, active: activeClass }}
     class="z-50 h-full"
@@ -265,7 +265,7 @@ You can control icon class by changing the `class` prop in the `Icon` component.
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -347,7 +347,7 @@ Use this sidebar example to create multi-level menu items by using the SidebarDr
     isOpen={isDemoOpen}
     isSingle={false}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
     class="z-50 h-full"
@@ -444,7 +444,7 @@ You can change the icons using `arrowup` and `arrowdown` slots.
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     position="absolute"
     class="z-50 h-full"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -512,7 +512,7 @@ Separate the content inside the sidebar component by applying a border separator
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -603,7 +603,7 @@ Use this example to add a CTA button inside the sidebar component and encourage 
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -697,7 +697,7 @@ Show the logo of your brand and link back to the homepage from the top part of t
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -773,7 +773,7 @@ The following example shows how to use children for your branding.
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -856,7 +856,7 @@ Use the following example to show a close button in the sidebar for a small scre
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full pt-6"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -955,7 +955,7 @@ You can use object for the sidebar items as the following example.
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     class="z-50 h-full"
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
@@ -1015,7 +1015,7 @@ The following example shows to open only one dropdown when you click another dro
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
     class="z-50 h-full"
@@ -1095,7 +1095,7 @@ To open all dropdown menus, set `isSingle={false}`.
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
     class="z-50 h-full"
@@ -1180,7 +1180,7 @@ You can add own transition by setting `transition` and `params` to `SidebarDropd
     backdrop={false}
     isOpen={isDemoOpen}
     closeSidebar={closeDemoSidebar}
-    params={{ x: -50, duration: 50 }}
+    transitionParams={{ x: -50, duration: 50 }}
     position="absolute"
     classes={{ nonactive: "p-2", active: "p-2" }}
     class="z-50 h-full"
@@ -1191,7 +1191,7 @@ You can add own transition by setting `transition` and `params` to `SidebarDropd
           <ChartOutline class="h-5 w-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
         {/snippet}
       </SidebarItem>
-      <SidebarDropdownWrapper label="E-commerce" classes={{ trigger: "p-2" }} transition={fade} {params}>
+      <SidebarDropdownWrapper label="E-commerce" classes={{ trigger: "p-2" }} transition={fade} transitionParams={params}>
         {#snippet icon()}
           <ShoppingBagSolid class="h-5 w-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
         {/snippet}
@@ -1273,7 +1273,7 @@ You can add own transition by setting `transition` and `params` to `SidebarDropd
         backdrop={false}
         isOpen={isDemoOpen}
         closeSidebar={closeDemoSidebar}
-        params={{ x: -50, duration: 50 }}
+        transitionParams={{ x: -50, duration: 50 }}
         class="z-50"
         position="static"
         classes={{ nonactive: "p-2", active: "p-2" }}
@@ -1378,7 +1378,7 @@ You can add own transition by setting `transition` and `params` to `SidebarDropd
 - activateClickOutside: true
 - backdrop: true
 - transition: fly
-- params
+- transitionParams
 - ariaLabel
 - activeUrl: ""
 - class: className
@@ -1439,7 +1439,7 @@ You can add own transition by setting `transition` and `params` to `SidebarDropd
 - isOpen: $bindable()
 - label
 - transition: slide
-- params
+- transitionParams
 - class: className
 - classes
 - onclick

@@ -15,7 +15,7 @@
     ["activateClickOutside", "true"],
     ["backdrop", "true"],
     ["transition", "fly"],
-    ["params", ""],
+    ["transitionParams", ""],
     ["ariaLabel", ""],
     ["activeUrl", "\"\""],
     ["class: className", ""],

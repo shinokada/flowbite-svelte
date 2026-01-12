@@ -15,7 +15,7 @@
     ["class: className", ""],
     ["dismissable", ""],
     ["transition", "fade"],
-    ["params", ""],
+    ["transitionParams", ""],
     ["listContent", ""],
     ["borderAccent", ""],
     ["closeButtonProps", ""]

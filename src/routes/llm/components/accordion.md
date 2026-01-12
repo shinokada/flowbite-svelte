@@ -279,7 +279,7 @@ Here's an example of how to use the `multiple` option together with "expand all"
 
 ## Custom transitions
 
-The default transition of `AccordionItem`s is <A href="https://svelte.dev/docs#run-time-svelte-transition-slide">slide</A>. Use the `transitionType` and `transitionParams` prop to create custom transitions.
+The default transition of `AccordionItem`s is <A href="https://svelte.dev/docs#run-time-svelte-transition-slide">slide</A>. Use the `transition` and `transitionParams` prop to create custom transitions.
 
 You can use any Svelte transition function such as `fade`, `blur`, `fly`, or `scale` from the `svelte/transition` module, and customize them with parameters like duration and easing.
 
@@ -294,11 +294,11 @@ You can use any Svelte transition function such as `fade`, `blur`, `fly`, or `sc
     {#snippet header()}Slide duration:1000{/snippet}
     <p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo ab necessitatibus sint explicabo ...</p>
   </AccordionItem>
-  <AccordionItem transitionType={blur} transitionParams={{ duration: 300 }}>
+  <AccordionItem transition={blur} transitionParams={{ duration: 300 }}>
     {#snippet header()}Blur duration:300{/snippet}
     <p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo ab necessitatibus sint explicabo ...</p>
   </AccordionItem>
-  <AccordionItem transitionType={fade} transitionParams={{ duration: 300 }}>
+  <AccordionItem transition={fade} transitionParams={{ duration: 300 }}>
     {#snippet header()}Fade duration:300{/snippet}
     <p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo ab necessitatibus sint explicabo ...</p>
   </AccordionItem>
@@ -395,9 +395,9 @@ To test: Fill out the form, navigate to a different page, and then use your brow
 </Accordion>
 ```
 
-## Using transitionType="none"
+## Using transition="none"
 
-When you set `transitionType="none"` on an Accordion or an AccordionItem, it disables Svelte transitions completely and instead uses CSS display properties (block/hidden) to show or hide content. This prevents Svelte from destroying and recreating components when toggling the accordion.
+When you set `transition="none"` on an Accordion or an AccordionItem, it disables Svelte transitions completely and instead uses CSS display properties (block/hidden) to show or hide content. This prevents Svelte from destroying and recreating components when toggling the accordion.
 
 This approach is useful when:
 - You want to preserve form state or component lifecycle
@@ -409,7 +409,7 @@ This approach is useful when:
   import { AccordionItem, Accordion } from "flowbite-svelte";
 </script>
 
-<Accordion transitionType="none">
+<Accordion transition="none">
   <AccordionItem>
     {#snippet header()}My Header 1{/snippet}
     Content A
@@ -421,12 +421,12 @@ This approach is useful when:
 </Accordion>
 
 <Accordion>
-  <AccordionItem transitionType="none">
-    {#snippet header()}transitionType: "none"{/snippet}
+  <AccordionItem transition="none">
+    {#snippet header()}transition: "none"{/snippet}
     Content C
   </AccordionItem>
   <AccordionItem>
-    {#snippet header()}transitionType: default{/snippet}
+    {#snippet header()}transition: default{/snippet}
     Content D
   </AccordionItem>
 </Accordion>
@@ -583,7 +583,7 @@ Combining multiple responsive patterns for sophisticated adaptive layouts:
 
 - `multiple`: Allow multiple items open simultaneously (default: `false`)
 - `flush`: Remove rounded borders for minimal design
-- `transitionType`: Control transitions (`TransitionFunc` or `"none"`)
+- `transition`: Control transitions (`TransitionFunc` or `"none"`)
 - `classes`: Customize styling with `active`, `inactive`, `button`, `contentWrapper`, `content` properties
 
 ### AccordionItem
@@ -591,7 +591,7 @@ Combining multiple responsive patterns for sophisticated adaptive layouts:
 - `open`: Control open state (bindable)
 - `header`: Snippet for header content
 - `arrowup` / `arrowdown`: Snippets for custom icons
-- `transitionType`: Override parent transition (`TransitionFunc` or `"none"`)
+- `transition`: Override parent transition (`TransitionFunc` or `"none"`)
 - `transitionParams`: Custom transition parameters
 - `classes`: Item-specific styling overrides
 
@@ -625,7 +625,7 @@ The Accordion component is built with accessibility in mind:
 - flush
 - multiple: false
 - class: className
-- transitionType
+- transition
 - respectReducedMotion: true
 - classes
 
@@ -642,7 +642,7 @@ The Accordion component is built with accessibility in mind:
 - arrowup
 - arrowdown
 - open: $bindable(false)
-- transitionType: slide
+- transition: slide
 - transitionParams
 - class: className
 - classes

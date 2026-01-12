@@ -12,7 +12,7 @@
     ["isOpen", "$bindable()"],
     ["label", ""],
     ["transition", "slide"],
-    ["params", ""],
+    ["transitionParams", ""],
     ["class: className", ""],
     ["classes", ""],
     ["onclick", ""]
