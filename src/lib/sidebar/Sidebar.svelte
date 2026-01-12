@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { innerWidth } from "svelte/reactivity/window";
   import type { Attachment } from "svelte/attachments";
   import type { SidebarContextType, SidebarProps } from "$lib/types";
   import { getTheme } from "$lib/theme-provider/themeUtils";
@@ -21,7 +22,7 @@
     activateClickOutside = true,
     backdrop = true,
     transition = fly,
-    params,
+    transitionParams,
     ariaLabel,
     activeUrl = "",
     class: className,
@@ -42,8 +43,7 @@
     "2xl": 1536
   };
 
-  let innerWidth: number = $state(-1);
-  let isLargeScreen = $derived(disableBreakpoints ? false : alwaysOpen || innerWidth >= breakpointValues[breakpoint]);
+  let isLargeScreen = $derived(disableBreakpoints ? false : alwaysOpen || (innerWidth.current ?? 0) >= breakpointValues[breakpoint]);
 
   // Create reactive context for activeUrl using getter
   const activeUrlContext = {
@@ -79,9 +79,9 @@
 
   const isBrowser = typeof window !== "undefined";
 
-  let transitionParams = $derived(
-    isBrowser && prefersReducedMotion.current ? { ...(params ? params : { x: -320, duration: 200, easing: sineIn }), duration: 0 } : params ? params : { x: -320, duration: 200, easing: sineIn }
-  );
+  const defaultTransitionParams = { x: -320, duration: 200, easing: sineIn };
+
+  let finalTransitionParams = $derived(isBrowser && prefersReducedMotion.current ? { ...(transitionParams ?? defaultTransitionParams), duration: 0 } : (transitionParams ?? defaultTransitionParams));
 
   setSidebarContext(sidebarCtx);
 
@@ -134,8 +134,6 @@
   };
 </script>
 
-<svelte:window bind:innerWidth />
-
 {#if !disableBreakpoints}
   {#if isOpen || isLargeScreen}
     {#if isOpen && !alwaysOpen}
@@ -151,7 +149,7 @@
     {/if}
     <aside
       {@attach trapFocusAttachment}
-      transition:transition={!alwaysOpen ? transitionParams : undefined}
+      transition:transition={!alwaysOpen ? finalTransitionParams : undefined}
       {...restProps}
       data-scope="sidebar"
       data-part="base"
@@ -187,7 +185,7 @@
 @prop activateClickOutside = true
 @prop backdrop = true
 @prop transition = fly
-@prop params
+@prop transitionParams
 @prop ariaLabel
 @prop activeUrl = ""
 @prop class: className

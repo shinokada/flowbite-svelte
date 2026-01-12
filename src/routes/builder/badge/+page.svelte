@@ -110,7 +110,7 @@
           })
           .join(",");
 
-        props.push(` params={{${paramsString}}}`);
+        props.push(` transitionParams={{${paramsString}}}`);
       }
 
       const propsString = props.length > 0 ? props.map((prop) => `\n  ${prop}`).join("") + "\n" : "";
@@ -156,7 +156,7 @@
       {border}
       {rounded}
       transition={currentTransition.transition}
-      params={currentTransition.params}
+      transitionParams={currentTransition.params}
       href={link}
     >
       {#if iconSlot}
