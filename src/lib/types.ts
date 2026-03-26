@@ -224,6 +224,7 @@ export interface AlertProps extends Omit<AlertVariants, "icon">, Omit<HTMLAttrib
   icon?: Snippet;
   alertStatus?: boolean;
   closeIcon?: Component;
+  closeAriaLabel?: string;
   transition?: TransitionFunc;
   params?: ParamsType;
   onclick?: () => void;
@@ -248,6 +249,7 @@ export interface BadgeProps extends BadgeVariants, Omit<HTMLAttributes<HTMLDivEl
   badgeStatus?: boolean;
   large?: boolean;
   dismissable?: boolean;
+  closeAriaLabel?: string;
   href?: HTMLAnchorAttributes["href"];
   target?: HTMLAnchorAttributes["target"];
   transition?: TransitionFunc;
@@ -260,6 +262,7 @@ export interface BannerProps extends BannerVariants, Omit<HTMLAttributes<HTMLDiv
   header?: Snippet;
   open?: boolean;
   dismissable?: boolean;
+  closeAriaLabel?: string;
   innerClass?: ClassValue;
   transition?: TransitionFunc;
   params?: ParamsType;
@@ -1849,6 +1852,7 @@ export interface TableSearchProps extends TableSearchVariants, HTMLTableAttribut
   svgClass?: ClassValue;
   tableClass?: ClassValue;
   placeholder?: string;
+  oninput?: (event: Event) => void;
 }
 
 // tabs
@@ -1982,6 +1986,7 @@ export interface ToastProps extends ToastVaraints, HTMLAttributes<HTMLDivElement
   icon?: Snippet;
   toastStatus?: boolean;
   dismissable?: boolean;
+  closeAriaLabel?: string;
   color?: ToastVaraints["color"];
   position?: ToastVaraints["position"];
   iconClass?: string;
