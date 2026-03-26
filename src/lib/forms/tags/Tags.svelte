@@ -182,7 +182,7 @@
       <CloseButton {disabled} size={closeBtnSize} class={close({ class: clsx(theme?.close, styling.close) })} onclick={() => deleteField(index)} />
     </div>
   {/each}
-  <div class="relative w-full" bind:this={inputContainer}>
+  <div class="relative min-w-[8rem] flex-1 self-center" bind:this={inputContainer}>
     <input
       {...inputProps}
       {disabled}
