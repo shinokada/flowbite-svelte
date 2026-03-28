@@ -1,5 +1,5 @@
 import { tv, type VariantProps } from "tailwind-variants";
-import type { Classes } from "$lib/theme/themeUtils";
+import type { Classes } from "$lib/theme-provider/themeUtils";
 
 // Variants
 export type TagsVariants = VariantProps<typeof tags> & Classes<typeof tags>;
@@ -7,8 +7,8 @@ export type TagsVariants = VariantProps<typeof tags> & Classes<typeof tags>;
 export const tags = tv({
   slots: {
     base: "border border-gray-300 dark:border-gray-600 rounded-lg flex flex-wrap focus-within:ring-primary-500 focus-within:ring-1 focus-within:border-primary-500 scrollbar-hidden bg-gray-50 dark:bg-gray-700 p-2",
-    tag: "flex items-center rounded-lg bg-gray-100 text-gray-900 border border-gray-300 my-1 ml-1 p-2 text-sm max-w-full min-w-fit",
-    span: "items-center",
+    item: "flex items-center rounded-lg bg-gray-100 text-gray-900 border border-gray-300 my-1 ml-1 p-2 text-sm max-w-full min-w-fit",
+    label: "items-center",
     close: "my-auto ml-1",
     input:
       "block text-sm my-1 mx-2.5 p-0 bg-transparent border-none outline-none text-gray-900 w-full min-w-fit focus:ring-0 placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50",

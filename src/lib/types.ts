@@ -920,6 +920,15 @@ export interface MultiSelectProps<T> extends MultiSelectVariants, Omit<HTMLAttri
 export interface TagsProps extends TagsVariants, HTMLAttributes<HTMLDivElement> {
   value: string[];
   placeholder?: string;
+  /** @deprecated Use `classes.item` instead */
+  itemClass?: ClassValue;
+  /** @deprecated Use `classes.label` instead */
+  spanClass?: ClassValue;
+  /** @deprecated Use `classes.close` instead */
+  closeClass?: ClassValue;
+  /** @deprecated Use `classes.input` instead */
+  inputClass?: ClassValue;
+  closeBtnSize?: CloseButtonVariants["size"];
   unique?: boolean;
   availableTags?: string[];
   maxSuggestions?: number;
