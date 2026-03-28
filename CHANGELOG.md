@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.33.0
+
+### Minor Changes
+
+- Fix/bugs (#1928)
+  - fix: Datepicker fix
+  - fix: #1921 snapshot example
+  - fix: #1923 add closeAriaLabel props to Alert, Banner, Badge and Toast
+  - fix: #1924 Navbar breakpoint
+  - **New Features**
+    - Added configurable close aria label for Alert, Badge, Banner, and Toast.
+    - Added oninput support for TableSearch.
+  - **Bug Fixes**
+    - Fixed Datepicker input binding and interaction.
+    - Improved Navbar breakpoint handling for more consistent responsive behavior.
+  - **Documentation**
+    - Updated example snapshot pattern and added changelog entry for 1.32.0.
+  - **Chores**
+    - Bumped package to 1.32.0 and updated dependencies.
+  - fix: #1913 add oninput to TableSearch
+  - fix: #1909 replace setContext in $effect with $derived + $effect pattern with a reactive-getter object
+  - fix: workflow playwright update
+
 ## 1.32.0
 
 ### Minor Changes
