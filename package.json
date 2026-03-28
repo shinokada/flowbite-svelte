@@ -277,14 +277,6 @@
       "types": "./dist/clipboard/Clipboard.svelte.d.ts",
       "svelte": "./dist/clipboard/Clipboard.svelte"
     },
-    "./ClipboardManager.svelte": {
-      "types": "./dist/clipboard-manager/ClipboardManager.svelte.d.ts",
-      "svelte": "./dist/clipboard-manager/ClipboardManager.svelte"
-    },
-    "./CommandPalette.svelte": {
-      "types": "./dist/command-palette/CommandPalette.svelte.d.ts",
-      "svelte": "./dist/command-palette/CommandPalette.svelte"
-    },
     "./DarkMode.svelte": {
       "types": "./dist/darkmode/DarkMode.svelte.d.ts",
       "svelte": "./dist/darkmode/DarkMode.svelte"
@@ -385,18 +377,6 @@
       "types": "./dist/footer/FooterLinkGroup.svelte.d.ts",
       "svelte": "./dist/footer/FooterLinkGroup.svelte"
     },
-    "./ButtonToggle.svelte": {
-      "types": "./dist/forms/button-toggle/ButtonToggle.svelte.d.ts",
-      "svelte": "./dist/forms/button-toggle/ButtonToggle.svelte"
-    },
-    "./ButtonToggleGroup.svelte": {
-      "types": "./dist/forms/button-toggle/ButtonToggleGroup.svelte.d.ts",
-      "svelte": "./dist/forms/button-toggle/ButtonToggleGroup.svelte"
-    },
-    "./CheckIcon.svelte": {
-      "types": "./dist/forms/button-toggle/CheckIcon.svelte.d.ts",
-      "svelte": "./dist/forms/button-toggle/CheckIcon.svelte"
-    },
     "./Checkbox.svelte": {
       "types": "./dist/forms/checkbox/Checkbox.svelte.d.ts",
       "svelte": "./dist/forms/checkbox/Checkbox.svelte"
@@ -484,14 +464,6 @@
     "./Indicator.svelte": {
       "types": "./dist/indicator/Indicator.svelte.d.ts",
       "svelte": "./dist/indicator/Indicator.svelte"
-    },
-    "./KanbanBoard.svelte": {
-      "types": "./dist/kanban/KanbanBoard.svelte.d.ts",
-      "svelte": "./dist/kanban/KanbanBoard.svelte"
-    },
-    "./KanbanCard.svelte": {
-      "types": "./dist/kanban/KanbanCard.svelte.d.ts",
-      "svelte": "./dist/kanban/KanbanCard.svelte"
     },
     "./Kbd.svelte": {
       "types": "./dist/kbd/Kbd.svelte.d.ts",
@@ -605,10 +577,6 @@
       "types": "./dist/rating/Thumbup.svelte.d.ts",
       "svelte": "./dist/rating/Thumbup.svelte"
     },
-    "./ScrollSpy.svelte": {
-      "types": "./dist/scroll-spy/ScrollSpy.svelte.d.ts",
-      "svelte": "./dist/scroll-spy/ScrollSpy.svelte"
-    },
     "./Sidebar.svelte": {
       "types": "./dist/sidebar/Sidebar.svelte.d.ts",
       "svelte": "./dist/sidebar/Sidebar.svelte"
@@ -689,22 +657,6 @@
       "types": "./dist/spinner/Spinner.svelte.d.ts",
       "svelte": "./dist/spinner/Spinner.svelte"
     },
-    "./Divider.svelte": {
-      "types": "./dist/split-pane/Divider.svelte.d.ts",
-      "svelte": "./dist/split-pane/Divider.svelte"
-    },
-    "./Pane.svelte": {
-      "types": "./dist/split-pane/Pane.svelte.d.ts",
-      "svelte": "./dist/split-pane/Pane.svelte"
-    },
-    "./SplitPane.svelte": {
-      "types": "./dist/split-pane/SplitPane.svelte.d.ts",
-      "svelte": "./dist/split-pane/SplitPane.svelte"
-    },
-    "./StepIndicator.svelte": {
-      "types": "./dist/step-indicator/StepIndicator.svelte.d.ts",
-      "svelte": "./dist/step-indicator/StepIndicator.svelte"
-    },
     "./BreadcrumbStepper.svelte": {
       "types": "./dist/stepper/BreadcrumbStepper.svelte.d.ts",
       "svelte": "./dist/stepper/BreadcrumbStepper.svelte"
@@ -777,10 +729,6 @@
       "types": "./dist/tabs/Tabs.svelte.d.ts",
       "svelte": "./dist/tabs/Tabs.svelte"
     },
-    "./ThemeProvider.svelte": {
-      "types": "./dist/theme/ThemeProvider.svelte.d.ts",
-      "svelte": "./dist/theme/ThemeProvider.svelte"
-    },
     "./Activity.svelte": {
       "types": "./dist/timeline/Activity.svelte.d.ts",
       "svelte": "./dist/timeline/Activity.svelte"
@@ -829,10 +777,6 @@
       "types": "./dist/tooltip/Tooltip.svelte.d.ts",
       "svelte": "./dist/tooltip/Tooltip.svelte"
     },
-    "./Tour.svelte": {
-      "types": "./dist/tour/Tour.svelte.d.ts",
-      "svelte": "./dist/tour/Tour.svelte"
-    },
     "./A.svelte": {
       "types": "./dist/typography/a/A.svelte.d.ts",
       "svelte": "./dist/typography/a/A.svelte"
@@ -840,10 +784,6 @@
     "./Blockquote.svelte": {
       "types": "./dist/typography/blockquote/Blockquote.svelte.d.ts",
       "svelte": "./dist/typography/blockquote/Blockquote.svelte"
-    },
-    "./DescriptionList.svelte": {
-      "types": "./dist/typography/descriptionlist/DescriptionList.svelte.d.ts",
-      "svelte": "./dist/typography/descriptionlist/DescriptionList.svelte"
     },
     "./Heading.svelte": {
       "types": "./dist/typography/heading/Heading.svelte.d.ts",
@@ -904,14 +844,6 @@
     "./Video.svelte": {
       "types": "./dist/video/Video.svelte.d.ts",
       "svelte": "./dist/video/Video.svelte"
-    },
-    "./VirtualMasonry.svelte": {
-      "types": "./dist/virtual-masonry/VirtualMasonry.svelte.d.ts",
-      "svelte": "./dist/virtual-masonry/VirtualMasonry.svelte"
-    },
-    "./VirtualList.svelte": {
-      "types": "./dist/virtuallist/VirtualList.svelte.d.ts",
-      "svelte": "./dist/virtuallist/VirtualList.svelte"
     },
     "./package.json": "./package.json"
   }
