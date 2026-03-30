@@ -6,11 +6,11 @@ export type ToastVaraints = VariantProps<typeof toast> & Classes<typeof toast>;
 
 export const toast = tv({
   slots: {
-    base: "flex w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-sm dark:text-gray-400 dark:bg-gray-800 gap-3",
-    icon: "w-8 h-8 inline-flex items-center justify-center shrink-0 rounded-lg",
+    base: "flex w-full max-w-xs p-4 text-body bg-neutral-primary-soft rounded-base shadow-xs border border-default gap-3",
+    icon: "inline-flex items-center justify-center shrink-0 w-8 h-8 rounded-lg",
     content: "w-full text-sm font-normal",
     close:
-      "ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+      "ms-auto -mx-1.5 -my-1.5 flex items-center justify-center text-body hover:text-heading bg-transparent border border-transparent hover:bg-neutral-secondary-medium focus:ring-4 focus:ring-neutral-tertiary rounded-lg p-1.5 inline-flex h-8 w-8"
   },
   variants: {
     position: {
@@ -20,17 +20,17 @@ export const toast = tv({
       "bottom-right": { base: "absolute bottom-5 end-5" }
     },
     color: {
+      brand: {
+        icon: "text-fg-brand bg-neutral-primary-medium"
+      },
       success: {
-        icon: "text-green-500 bg-green-100 dark:bg-green-800 dark:text-green-200",
-        close: "text-green-500 dark:text-green-200 hover:text-green-600 dark:hover:text-green-500"
+        icon: "text-fg-success bg-success-soft"
       },
       warning: {
-        icon: "text-yellow-500 bg-yellow-100 dark:bg-yellow-800 dark:text-yellow-200",
-        close: "text-yellow-500 dark:text-yellow-200 hover:text-yellow-600 dark:hover:text-yellow-500"
+        icon: "text-fg-warning bg-warning-soft"
       },
       danger: {
-        icon: "text-red-500 bg-red-100 dark:bg-red-800 dark:text-red-200",
-        close: "text-red-500 dark:text-red-200 hover:text-red-600 dark:hover:text-red-500"
+        icon: "text-fg-danger bg-danger-soft"
       },
       primary: {
         icon: "text-primary-500 bg-primary-100 dark:bg-primary-800 dark:text-primary-200",

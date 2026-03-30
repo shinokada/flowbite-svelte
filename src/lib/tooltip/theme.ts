@@ -7,9 +7,9 @@ export const tooltip = tv({
   base: "px-3 py-2 rounded-base text-sm z-50 pointer-events-none",
   variants: {
     type: {
-      light: "bg-white text-gray-800 dark:bg-white dark:text-gray-800 border border-gray-200 dark:border-gray-200",
-      auto: "bg-white text-gray-800 dark:bg-gray-800 dark:text-white border border-gray-200 dark:border-gray-700",
-      dark: "bg-gray-800 text-white dark:bg-gray-800 dark:text-white dark:border dark:border-gray-700",
+      light: "bg-neutral-primary-medium text-heading border border-default",
+      auto: "bg-neutral-primary-medium text-heading dark:bg-dark dark:text-white border border-default",
+      dark: "bg-dark text-white",
       custom: ""
     },
     color: {

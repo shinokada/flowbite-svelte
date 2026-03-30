@@ -5,7 +5,7 @@ export type VideoVariants = VariantProps<typeof video> & Classes<typeof video>;
 
 export const video = tv({
   slots: {
-    base: "w-full",
+    base: "w-full rounded-base",
     source: "",
     track: ""
   }

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.0-next.10
+
+### Patch Changes
+
+- fix: component up to timeline
+
 ## 2.0.0-next.9
 
 ### Patch Changes
