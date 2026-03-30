@@ -3,7 +3,7 @@
   import { CheckCircleSolid, ExclamationCircleSolid, FireOutline, CloseCircleSolid } from "flowbite-svelte-icons";
 </script>
 
-<Toast color="green">
+<Toast color="success">
   {#snippet icon()}
     <CheckCircleSolid class="h-5 w-5" />
     <span class="sr-only">Check icon</span>
@@ -11,7 +11,7 @@
   Item moved successfully.
 </Toast>
 
-<Toast color="red">
+<Toast color="danger">
   {#snippet icon()}
     <CloseCircleSolid class="h-5 w-5" />
     <span class="sr-only">Error icon</span>
@@ -19,7 +19,7 @@
   Item has been deleted.
 </Toast>
 
-<Toast color="red">
+<Toast color="warning">
   {#snippet icon()}
     <ExclamationCircleSolid class="h-5 w-5" />
     <span class="sr-only">Warning icon</span>
