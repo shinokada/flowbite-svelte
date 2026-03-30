@@ -25,25 +25,25 @@
   <Button type="submit">Submit</Button>
 </form>
 <Popover class="text-sm" triggeredBy="#password" placement="bottom">
-  <h3 class="font-semibold text-gray-900 dark:text-white">Must have at least 6 characters</h3>
+  <h3 class="text-heading font-semibold">Must have at least 6 characters</h3>
   <div class="grid grid-cols-4 gap-2">
-    <div class="h-1 bg-orange-300 dark:bg-orange-400"></div>
-    <div class="h-1 bg-orange-300 dark:bg-orange-400"></div>
-    <div class="h-1 bg-gray-200 dark:bg-gray-600"></div>
-    <div class="h-1 bg-gray-200 dark:bg-gray-600"></div>
+    <div class="bg-warning h-1"></div>
+    <div class="bg-warning h-1"></div>
+    <div class="bg-neutral-quaternary h-1"></div>
+    <div class="bg-neutral-quaternary h-1"></div>
   </div>
   <p class="py-2">It’s better to have:</p>
   <ul>
     <li class="mb-1 flex items-center">
-      <CheckOutline class="me-2 h-4 w-4 text-green-400 dark:text-green-500" />
+      <CheckOutline class="text-success me-2 h-4 w-4" />
       Upper &amp; lower case letters
     </li>
     <li class="mb-1 flex items-center">
-      <CheckOutline class="me-2 h-4 w-4 text-green-400 dark:text-green-500" />
+      <CheckOutline class="text-success me-2 h-4 w-4" />
       A symbol (#$&amp;)
     </li>
     <li class="flex items-center">
-      <CloseOutline class="me-2 h-4 w-4 text-gray-300 dark:text-gray-400" />A longer password (min. 12 chars.)
+      <CloseOutline class="text-body me-2 h-4 w-4" />A longer password (min. 12 chars.)
     </li>
   </ul>
 </Popover>

@@ -11,21 +11,21 @@
     </div>
     <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
       <div>
-        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
+        <h2 class="text-heading mb-6 text-sm font-semibold uppercase">Resources</h2>
         <FooterLinkGroup>
           <FooterLink class="mb-4" href="/">Flowbite</FooterLink>
           <FooterLink class="mb-4" href="/">Tailwind CSS</FooterLink>
         </FooterLinkGroup>
       </div>
       <div>
-        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
+        <h2 class="text-heading mb-6 text-sm font-semibold uppercase">Follow us</h2>
         <FooterLinkGroup>
           <FooterLink class="mb-4" href="/">GitHub</FooterLink>
           <FooterLink class="mb-4" href="/">Discord</FooterLink>
         </FooterLinkGroup>
       </div>
       <div>
-        <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
+        <h2 class="text-heading mb-6 text-sm font-semibold uppercase">Legal</h2>
         <FooterLinkGroup>
           <FooterLink class="mb-4" href="/">Privacy Policy</FooterLink>
           <FooterLink class="mb-4" href="/">Terms & Conditions</FooterLink>
@@ -33,21 +33,21 @@
       </div>
     </div>
   </div>
-  <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8 dark:border-gray-700" />
+  <hr class="border-default my-6 sm:mx-auto lg:my-8" />
   <div class="sm:flex sm:items-center sm:justify-between">
     <FooterCopyright href="/" by="Flowbite™" />
     <div class="mt-4 flex space-x-6 sm:mt-0 sm:justify-center rtl:space-x-reverse">
       <FooterIcon href="/">
-        <FacebookSolid class="h-5 w-5 text-gray-500 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white" />
+        <FacebookSolid class="text-body hover:text-heading h-5 w-5" />
       </FooterIcon>
       <FooterIcon href="/">
-        <DiscordSolid class="h-5 w-5 text-gray-500 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white" />
+        <DiscordSolid class="text-body hover:text-heading h-5 w-5" />
       </FooterIcon>
       <FooterIcon href="/">
-        <TwitterSolid class="h-5 w-5 text-gray-500 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white" />
+        <TwitterSolid class="text-body hover:text-heading h-5 w-5" />
       </FooterIcon>
       <FooterIcon href="/">
-        <GithubSolid class="h-5 w-5 text-gray-500 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white" />
+        <GithubSolid class="text-body hover:text-heading h-5 w-5" />
       </FooterIcon>
       <FooterIcon href="/">
         <Dribble />

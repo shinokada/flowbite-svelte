@@ -3,21 +3,21 @@
 </script>
 
 <div class="my-4">
-  <div class="mb-1 text-base font-medium dark:text-white">Small</div>
+  <div class="text-heading mb-1 text-base font-medium">Small</div>
   <Progressbar progress="50" size="h-1.5" />
 </div>
 
 <div class="my-4">
-  <div class="mb-1 text-base font-medium dark:text-white">Default</div>
+  <div class="text-heading mb-1 text-base font-medium">Default</div>
   <Progressbar progress="50" size="h-2.5" />
 </div>
 
 <div class="my-4">
-  <div class="mb-1 text-lg font-medium dark:text-white">Large</div>
+  <div class="text-heading mb-1 text-lg font-medium">Large</div>
   <Progressbar progress="50" size="h-4" />
 </div>
 
 <div class="my-4">
-  <div class="mb-1 text-lg font-medium dark:text-white">Extra Large</div>
+  <div class="text-heading mb-1 text-lg font-medium">Extra Large</div>
   <Progressbar progress="50" size="h-6" />
 </div>
