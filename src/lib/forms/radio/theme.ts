@@ -6,36 +6,36 @@ export type RadioVariants = VariantProps<typeof radio> & Classes<typeof radio>;
 
 export const radio = tv({
   slots: {
-    input: "flex items-center w-4 h-4 bg-gray-100 border-gray-300 dark:ring-offset-gray-800 focus:ring-2 mr-2",
+    input: "w-4 h-4 text-fg-brand bg-neutral-secondary-medium border border-default-medium focus:ring-2 focus:ring-brand-subtle me-2",
     label: "flex items-center"
   },
   variants: {
     color: {
       // "brand" | "danger" | "success" | "warning" | "dark" | "neutral"
       brand: {
-        input: "text-brand focus:ring-fuchsia-500 dark:focus:ring-fuchsia-600"
+        input: ""
       },
       dark: {
-        input: "text-gray-600 focus:ring-gray-500 dark:focus:ring-gray-600"
+        input: "text-heading focus:ring-neutral-tertiary"
       },
-      danger: { input: "text-red-600 focus:ring-red-500 dark:focus:ring-red-600" },
+      danger: { input: "text-danger focus:ring-danger-soft" },
       neutral: {
-        input: "text-orange-500 focus:ring-orange-500 dark:focus:ring-orange-600"
+        input: "text-body focus:ring-neutral-tertiary"
       },
       warning: {
-        input: "text-yellow-400 focus:ring-yellow-500 dark:focus:ring-yellow-600"
+        input: "text-warning focus:ring-warning-soft"
       },
       success: {
-        input: "text-green-600 focus:ring-green-500 dark:focus:ring-green-600"
+        input: "text-success focus:ring-success-soft"
       }
     },
     tinted: {
-      true: { input: "dark:bg-gray-600 dark:border-gray-500" },
-      false: { input: "dark:bg-gray-700 dark:border-gray-600" }
+      true: {},
+      false: {}
     },
     custom: {
       true: { input: "sr-only peer" },
-      false: { input: "relative" }
+      false: {}
     },
     inline: {
       true: { label: "inline-flex" },

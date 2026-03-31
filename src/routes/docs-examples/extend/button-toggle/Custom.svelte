@@ -32,4 +32,4 @@
     Three
   </ButtonToggle>
 </ButtonToggleGroup>
-<p class="mt-2 dark:text-white">Selected: {singleValue || "None"}</p>
+<p class="text-heading mt-2">Selected: {singleValue || "None"}</p>

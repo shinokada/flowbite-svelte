@@ -247,7 +247,7 @@
 {/if}
 
 {#if isCombobox || right || left || clearable}
-  <div class={base({ class: clsx(theme?.base, className) })} data-scope="input" data-part="base">
+  <div class={base({ class: clsx(theme?.base) })} data-scope="input" data-part="base">
     {#if left}
       <div class={leftAddon({ class: clsx(theme?.leftAddon, styling?.leftAddon) })} data-part="left-addon">
         {@render left()}
@@ -292,7 +292,7 @@
       onfocus={handleFocus}
       onblur={handleBlur}
       onkeydown={handleKeydown}
-      class={clsx(!wrapped && base(), inputCls({ class: clsx(theme?.input, className) }))}
+      class={clsx(!wrapped && base(), inputCls({ class: clsx(theme?.input, styling?.input, className) }))}
       data-part="input"
     />
     {#if value !== undefined && value !== "" && clearable}
