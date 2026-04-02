@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.0-next.13
+
+### Patch Changes
+
+- fix: accordion examples, +layout.server and version display
+
 ## 2.0.0-next.12
 
 ### Patch Changes
