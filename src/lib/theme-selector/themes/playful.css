@@ -1,4 +1,4 @@
-:root {
+@theme {
   --font-sans: "Shantell Sans", cursive;
   --font-body: "Shantell Sans", cursive;
 
@@ -19,6 +19,7 @@
   --radius-xxs: 2px;
   --radius-xs: 2px;
   --radius-sm: 10px;
+  --radius: 10px;
   --radius: 14px;
   --radius-md: 14px;
   --radius-base: 20px;

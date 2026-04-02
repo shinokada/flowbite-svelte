@@ -51,15 +51,19 @@ Control themes programmatically using the exported functions:
   // Switch to a specific theme
   function switchTheme() {
     loadTheme("minimal");
+    currentTheme = getCurrentTheme();
+  }
+
+  // Switch to a custom/static theme (second arg must be true)
+  function switchCustomTheme() {
+    loadTheme("mytheme", true);
+    currentTheme = getCurrentTheme();
   }
   
   // Get current theme ID
-  let currentTheme = $state("");
-  $effect(() => {
-    currentTheme = getCurrentTheme(); // "default", "minimal", etc.
-  });
+  let currentTheme = $state(getCurrentTheme()); // "default", "minimal", etc.
   
-  // Get full theme object
+  // Get full theme object (only defined for built-in themes)
   const theme = getSelectedTheme();
   // { id: "default", name: "Default", cssPath: "...", fontUrl: "...", colors: [...] }
 </script>
@@ -108,16 +112,107 @@ Control themes programmatically using the exported functions:
 </Card>
 ```
 
+## Creating Custom Themes
+
+You can add custom themes without modifying the library by placing CSS files in your project's `static/themes/` directory and listing them in a manifest.
+
+### 1. Add a theme CSS file
+
+Create a runtime theme file in `static/themes/` using `:root` for light mode and `.dark` for dark mode overrides. Keep this separate from the library `src/lib/theme-selector/themes/*.css` files, which are for build-time theme registration.
+
+```css
+/* static/themes/mytheme.css */
+:root {
+  --color-brand: var(--color-green-700);
+  --color-brand-soft: var(--color-green-100);
+  /* ... other token overrides ... */
+}
+
+.dark {
+  --color-brand: var(--color-green-600);
+  /* ... dark mode overrides ... */
+}
+```
+
+### 2. Add a manifest file
+
+Create `static/themes/manifest.json` listing all themes to display in the selector. Every entry in this manifest is loaded at runtime from `static/themes/<id>.css`, including built-in ids like `"default"`. If you include a built-in theme here, copy its runtime CSS into `static/themes/` as well. Custom themes can be objects:
+
+```json
+[
+  "default",
+  "minimal",
+  "enterprise",
+  "playful",
+  "mono",
+  {
+    "id": "mytheme",
+    "colors": [
+      "bg-gray-100 dark:bg-gray-700",
+      "bg-green-50 dark:bg-green-900",
+      "bg-green-200 dark:bg-green-800",
+      "bg-green-700 dark:bg-green-700"
+    ]
+  }
+]
+```
+
+The four `colors` values are Tailwind utility classes for the four color swatches shown in the dropdown (background → lightest brand → mid brand → strong brand). You can also add an optional `"name"` field to override the auto-capitalized display name.
+
+### 3. Add the component
+
+`loadFromStatic` defaults to `true`, so `ThemeSelector` automatically fetches `/themes/manifest.json` on mount — no extra prop needed:
+
+```svelte
+<!-- src/routes/+layout.svelte -->
+<script>
+  import { ThemeSelector } from "flowbite-svelte";
+</script>
+
+<header>
+  <ThemeSelector />
+</header>
+```
+
+If you want to force the bundled theme list (ignoring the manifest), pass `loadFromStatic={false}`:
+
+```svelte
+<ThemeSelector loadFromStatic={false} />
+```
+
+In your `src/routes/layout.css` (or equivalent), import a theme CSS file for build-time Tailwind token registration. You have two options:
+
+**Option A — import directly from the library** (no customization, path may vary by project structure):
+
+```css
+@import "../../node_modules/flowbite-svelte/src/lib/theme-selector/themes/default.css";
+```
+
+**Option B — copy to your project and customize** (recommended if you want to change brand colors):
+
+```css
+@import "../../static/styles/mydefault.css";
+```
+
+If your manifest includes a built-in theme id, also create `static/themes/<id>.css` for it. Separately, copy the build-time token file from the library as a starting point:
+
+```sh
+cp node_modules/flowbite-svelte/src/lib/theme-selector/themes/default.css static/styles/mydefault.css
+```
+
+Then edit `static/styles/mydefault.css` to set your own `--color-primary-*` values inside `@theme {}`. This controls what Tailwind utility classes like `bg-primary-500` resolve to at build time.
+
 ## API Reference
 
 ### Functions
 
-**`loadTheme(themeId: ThemeId): void`**
+**`loadTheme(themeId: string, loadFromStatic?: boolean): void`**
 
-Loads and applies a theme by ID.
+Loads and applies a theme by ID. When `loadFromStatic` is `true`, loads from `/themes/${themeId}.css`.
 
 ```typescript
 loadTheme("minimal");
+loadTheme("mytheme", true);
 ```
 
 **`getCurrentTheme(): string`**
@@ -130,7 +225,7 @@ const current = getCurrentTheme(); // "default"
 
 **`getSelectedTheme(): FlowbiteTheme | undefined`**
 
-Returns the full theme configuration object.
+Returns the full theme configuration object. Only defined for built-in themes; returns `undefined` for custom static themes.
 
 ```typescript
 const theme = getSelectedTheme();
@@ -149,33 +244,6 @@ interface FlowbiteTheme {
   colors: string[];
 }
 ```
-
-## Creating Custom Themes
-
-To add custom themes, modify the library's `themes.ts` file:
-
-```typescript
-// Import your CSS file as a URL
-import customCss from './themes/custom-runtime.css?url';
-
-export const themeConfigs = [
-  // ... existing themes
-  {
-    id: "custom",
-    name: "My Custom Theme",
-    cssPath: customCss, // Vite handles the URL
-    fontUrl: "https://fonts.googleapis.com/css2?family=Roboto&display=swap",
-    colors: [
-      "bg-purple-100 dark:bg-purple-700",
-      "bg-purple-300 dark:bg-purple-800",
-      "bg-purple-500 dark:bg-purple-600",
-      "bg-purple-700 dark:bg-purple-500"
-    ]
-  }
-] as const;
-```
-
-The `?url` import suffix tells Vite to process the CSS file and return a proper URL. Your CSS files stay in the library's source directory—no need for users to copy files to a `static` folder.
 
 ## Accessibility
 
