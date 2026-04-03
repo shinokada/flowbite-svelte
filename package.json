@@ -75,7 +75,7 @@
     "lowlight": "^3.3.0",
     "mdsvex": "^0.12.7",
     "mdsvexamples": "^0.5.1",
-    "playwright": "^1.58.2",
+    "playwright": "^1.59.1",
     "prettier": "^3.8.1",
     "prettier-plugin-svelte": "^3.5.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
