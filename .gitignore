@@ -17,5 +17,5 @@ vite.config.ts.timestamp-*
 bun.lockb
 /.vercel
 
-.claude/
-flowbite/
+/.claude/
+/flowbite/
