@@ -31,7 +31,29 @@
   // };
   // const toggle = () => {};
 
+  const BANNER_KEY = "top-banner-dismissed-until";
+  const BANNER_DURATION_MS = 24 * 60 * 60 * 1000;
+  let bannerOpen = $state(false);
+
+  function onBannerClose(_event: MouseEvent) {
+    const until = Date.now() + BANNER_DURATION_MS;
+    try {
+      localStorage.setItem(BANNER_KEY, String(until));
+    } catch {
+      // ignore storage failures
+    }
+    bannerOpen = false;
+  }
+
   onMount(() => {
+    try {
+      const raw = localStorage.getItem(BANNER_KEY);
+      const until = raw ? Number(raw) : NaN;
+      bannerOpen = !Number.isFinite(until) || Date.now() > until;
+    } catch {
+      bannerOpen = true;
+    }
+
     // Workaround until https://github.com/sveltejs/kit/issues/2664 is fixed
     if (typeof window !== "undefined" && window.location.hash) {
       const deepLinkedElement = document.getElementById(window.location.hash.substring(1));
@@ -43,14 +65,14 @@
   });
 </script>
 
-<Banner color="yellow" class="sticky top-0 z-50">
+<Banner color="yellow" class="sticky top-0 z-50" bind:open={bannerOpen} onclose={onBannerClose}>
   <p class="flex items-center gap-2 text-sm font-medium text-yellow-800 dark:text-yellow-300">
     <svg class="h-4 w-4 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
     </svg>
-    Check out the next version of Flowbite Svelte!
+    Flowbite Svelte v2 is coming soon!
     <a href="https://flowbite-svelte-v2.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-semibold underline underline-offset-2 hover:no-underline">
-      Visit Flowbite Svelte v2 →
+      Check it out →
     </a>
   </p>
 </Banner>
