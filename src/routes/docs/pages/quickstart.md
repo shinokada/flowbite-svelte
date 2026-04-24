@@ -12,8 +12,6 @@ description: Learn how to get started with the free and open-source Flowbite Sve
   import { LlmLink } from '../../utils'
 </script>
 
-You can install Flowbite Svelte by using the <A href='/docs/extend/flowbite-svelte-starter'>flowbite-svelte-start</A> or from scratch.
-
 ## Getting started
 
 Learn how to get started with Flowbite Svelte by following the quickstart guide and start leveraging the interactive Svelte components coupled with Flowbite and Tailwind CSS.
@@ -72,7 +70,7 @@ pnpm i -D flowbite-svelte-icons
 
 ### Configuration
 
-Update your main CSS file to support Tailwind CSS and the Flowbite plugin. You can also customize the primary color by modifying the appropriate color values. See more details in the [introduction page](/docs/pages/introduction#configuration).
+Update your main CSS file to support Tailwind CSS and the Flowbite plugin. You can also customize the primary color by modifying the appropriate color values. See more details in the [introduction page](/docs/pages/introduction).
 
 #### SvelteKit Projects
 

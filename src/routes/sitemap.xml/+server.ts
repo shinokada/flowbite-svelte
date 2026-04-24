@@ -20,7 +20,7 @@ export const GET: RequestHandler = async () => {
       "^/docs-examples.*",
       "^/docs/examples.*",
       "^/fonts.*",
-      "^/testdir.*",
+      "^/_testdir.*",
       "^/layouts/component.*",
       "^/admin-dashboard/.*/\\[.*\\].*" // Exclude any dynamic routes in admin-dashboard
     ],

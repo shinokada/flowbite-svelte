@@ -29,5 +29,6 @@
     "tests/**/*.js",
     "tests/**/*.ts",
     "tests/**/*.svelte"
-  ]
+  ],
+  "exclude": ["node_modules", "dist", "build", "src/routes/_testdir"]
 }

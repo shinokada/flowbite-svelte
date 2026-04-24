@@ -137,8 +137,6 @@ Flowbite Svelte has a rich collection of commonly used components coded with Sve
 
 Flowbite Svelte is a free and open-source UI component library built with Svelte native components and based on the Flowbite ecosystem and contributions are more than welcome.
 
-Check out [contributing guide](/docs/pages/how-to-contribute) to learn how you can be a part of the open-source community.
-
 ## License
 
 Flowbite Svelte is a free and open-source UI component library licensed under the [MIT License](https://github.com/themesberg/flowbite-svelte/blob/main/LICENSE).

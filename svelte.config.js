@@ -37,6 +37,15 @@ const config = {
   },
   kit: {
     adapter: adapter(),
+    prerender: {
+      handleHttpError: ({ status, path, referrer }) => {
+        if (status === 404) {
+          console.warn(`404 during prerender: ${path} (linked from ${referrer})`);
+          return;
+        }
+        throw new Error(`${status} ${path}`);
+      }
+    },
     alias: {
       "flowbite-svelte": path.resolve("./src/lib/index.ts"),
       $icons: path.resolve("./src/routes/utils/icons"),

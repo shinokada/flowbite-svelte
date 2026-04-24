@@ -325,5 +325,10 @@ export const GET = async ({ url }) => {
   const resvg = new Resvg(svg, { fitTo: { mode: "width", value: width } });
   const image = resvg.render();
 
-  return new Response(image.asPng(), { headers: { "content-type": "image/png" } });
+  return new Response(image.asPng(), {
+    headers: {
+      "content-type": "image/png",
+      "Cache-Control": "public, max-age=31536000, immutable"
+    }
+  });
 };

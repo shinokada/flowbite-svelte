@@ -18,7 +18,6 @@
 - [Getting started](https://flowbite-svelte.com/docs/pages/quickstart)
 - [Introduction](https://flowbite-svelte.com/docs/pages/introduction)
 - [Types](https://flowbite-svelte.com/docs/pages/typescript)
-- [How to contribute](https://flowbite-svelte.com/docs/pages/how-to-contribute)
 - [License](https://flowbite-svelte.com/docs/pages/license)
 
 ## Documentation
