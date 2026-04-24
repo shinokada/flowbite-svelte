@@ -10,10 +10,10 @@ node_modules
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-/src/routes/testdir
+/src/routes/_testdir
 /src/routes/test
 
-/_test-results
+/test-results
 bun.lockb
 /.vercel
 
