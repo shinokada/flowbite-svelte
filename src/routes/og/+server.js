@@ -328,7 +328,12 @@ export const GET = async ({ url }) => {
   return new Response(image.asPng(), {
     headers: {
       "content-type": "image/png",
-      "Cache-Control": "public, max-age=31536000, immutable"
+      // Browser cache: 1 year
+      "Cache-Control": "public, max-age=31536000, immutable",
+      // Vercel CDN cache: 1 year — prevents re-invoking the function for the same URL
+      "Vercel-CDN-Cache-Control": "public, max-age=31536000, immutable",
+      // Fallback for other CDN layers
+      "CDN-Cache-Control": "public, max-age=31536000, immutable"
     }
   });
 };
