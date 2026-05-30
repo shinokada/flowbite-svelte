@@ -3,6 +3,8 @@ import { json } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 import { mockColumns } from "../mockData";
 
+export const prerender = false;
+
 export const POST: RequestHandler = async ({ request }) => {
   const { cardId, fromColumnId, toColumnId } = await request.json();
 

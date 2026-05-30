@@ -38,6 +38,7 @@ const config = {
   kit: {
     adapter: adapter(),
     prerender: {
+      handleMissingId: "warn",
       handleHttpError: ({ status, path, referrer }) => {
         if (status === 404) {
           console.warn(`404 during prerender: ${path} (linked from ${referrer})`);

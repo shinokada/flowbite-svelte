@@ -40,7 +40,7 @@
   <div class="p-4">
     <Breadcrumb class="mb-5">
       <BreadcrumbItem home>Home</BreadcrumbItem>
-      <BreadcrumbItem href="/crud/users">Users</BreadcrumbItem>
+      <BreadcrumbItem href="/admin-dashboard/crud/users">Users</BreadcrumbItem>
       <BreadcrumbItem>List</BreadcrumbItem>
     </Breadcrumb>
     <Heading tag="h1" class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All users</Heading>

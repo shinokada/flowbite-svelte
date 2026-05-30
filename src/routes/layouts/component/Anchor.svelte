@@ -15,14 +15,16 @@
 <script lang="ts">
   import { twMerge } from "tailwind-merge";
 
-  let { children, tag, class: className, ...restProps } = $props();
+  // `id` may be passed from the rehype/remark heading plugin via restProps
+  let { children, tag, class: className, id: ssrId = "", ...restProps } = $props();
 
   let content: string = $state("");
-  let slug: string = $state("");
+  // Use ssrId from the remark plugin as the initial value for SSR/prerender;
+  // use:init overwrites it with the DOM-text-computed slug on the client.
+  let slug: string = $derived(content ? content.replace(/\s/g, "-").toLocaleLowerCase() : ssrId);
 
   function init(node: HTMLElement) {
     content = getText(node);
-    slug = content.replace(/\s/g, "-").toLocaleLowerCase();
   }
 
   let elemClass = $derived(twMerge("relative group", className));

@@ -64,7 +64,7 @@
   <div class="p-4">
     <Breadcrumb class="mb-5">
       <BreadcrumbItem home>Home</BreadcrumbItem>
-      <BreadcrumbItem href="/crud/products">E-commerce</BreadcrumbItem>
+      <BreadcrumbItem href="/admin-dashboard/crud/products">E-commerce</BreadcrumbItem>
       <BreadcrumbItem>Products</BreadcrumbItem>
     </Breadcrumb>
     <Heading tag="h1" class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All products</Heading>

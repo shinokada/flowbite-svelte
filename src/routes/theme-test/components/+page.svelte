@@ -228,7 +228,7 @@
           <p class="mb-2 text-sm text-gray-600 dark:text-gray-400">Breadcrumb:</p>
           <Breadcrumb class="text-sm">
             <BreadcrumbItem href="/theme-test" home>Home</BreadcrumbItem>
-            <BreadcrumbItem href="/projects">Projects</BreadcrumbItem>
+            <BreadcrumbItem href="#">Projects</BreadcrumbItem>
             <BreadcrumbItem>Test</BreadcrumbItem>
           </Breadcrumb>
         </div>

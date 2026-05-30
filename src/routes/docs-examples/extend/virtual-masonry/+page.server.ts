@@ -1,5 +1,7 @@
 import type { PageServerLoad } from "./$types";
 
+export const prerender = false;
+
 export interface Image {
   id: string;
   url: string;

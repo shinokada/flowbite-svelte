@@ -50,7 +50,7 @@
 
       const propsString = props.length > 0 ? props.map((prop) => `\n  ${prop}`).join("") + "\n" : "";
 
-      return `<Video src="/videos/flowbite.mp4"${propsString} trackSrc="flowbite.mp4" />`;
+      return `<Video src="/videos/flowbite.mp4"${propsString} trackSrc="/videos/flowbite.mp4" />`;
     })()
   );
 
@@ -72,7 +72,7 @@
 <H1>Video Player Builder</H1>
 <CodeWrapper>
   <div class="mb-4 md:h-[500px]">
-    <Video src="/videos/flowbite.mp4" {controls} {autoplay} {muted} trackSrc="flowbite.mp4" class={currentClass.class} />
+    <Video src="/videos/flowbite.mp4" {controls} {autoplay} {muted} trackSrc="/videos/flowbite.mp4" class={currentClass.class} />
   </div>
   <div class="mb-4 flex flex-wrap space-x-6">
     <Label class="mb-4 w-full font-bold">Style</Label>

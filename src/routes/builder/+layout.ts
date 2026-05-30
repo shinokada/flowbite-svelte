@@ -1,13 +1,23 @@
 import type { LayoutLoad } from "./$types";
+import { fetchMarkdownPosts, fetchBuilders, fetchBlocksMarkdownPosts, fetchDashboardPosts } from "../utils";
 
-export const prerender = false;
+export const prerender = true;
 
-export const load: LayoutLoad = async ({ fetch }) => {
+export const load: LayoutLoad = async ({ parent }) => {
+  const parentData = await parent();
+
   try {
-    const response = await fetch("/api/posts");
+    const [posts, blocks, builders, dashboard] = await Promise.all([fetchMarkdownPosts(), fetchBlocksMarkdownPosts(), fetchBuilders(), fetchDashboardPosts()]);
 
-    return { posts: await response.json() };
+    return {
+      ...parentData,
+      posts: { posts, blocks, builders, dashboard }
+    };
   } catch (error) {
-    console.error(`Error in load function for /: ${error}`);
+    console.error(`Error in load function for /builder: ${error}`);
+    return {
+      ...parentData,
+      posts: { posts: {}, blocks: {}, builders: [], dashboard: [] }
+    };
   }
 };

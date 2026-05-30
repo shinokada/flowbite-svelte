@@ -2,4 +2,4 @@
   import { Video } from "flowbite-svelte";
 </script>
 
-<Video src="/videos/flowbite.mp4" controls class="w-96" trackSrc="flowbite.mp4" />
+<Video src="/videos/flowbite.mp4" controls class="w-96" trackSrc="/videos/flowbite.mp4" />

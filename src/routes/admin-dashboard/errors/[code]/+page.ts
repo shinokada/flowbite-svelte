@@ -2,6 +2,8 @@ import { error } from "@sveltejs/kit";
 import type { PageLoad } from "./$types";
 import type { NumericRange } from "@sveltejs/kit";
 
+export const prerender = false;
+
 export const load: PageLoad = ({ params }) => {
   const status = +params.code;
 

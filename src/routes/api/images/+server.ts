@@ -1,5 +1,7 @@
 import type { RequestHandler } from "./$types";
 
+export const prerender = false;
+
 const errorResponse = () =>
   new Response(JSON.stringify({ images: [] }), {
     status: 502,

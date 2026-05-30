@@ -2,4 +2,4 @@
   import { Video } from "flowbite-svelte";
 </script>
 
-<Video src="/videos/flowbite.mp4" autoplay muted controls trackSrc="flowbite.mp4" />
+<Video src="/videos/flowbite.mp4" autoplay muted controls trackSrc="/videos/flowbite.mp4" />

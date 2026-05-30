@@ -1,5 +1,12 @@
-import type { PageLoad } from "./$types";
+import type { PageLoad, EntryGenerator } from "./$types";
 import { error } from "@sveltejs/kit";
+
+const exampleFiles = import.meta.glob("../*.svelte");
+
+export const entries: EntryGenerator = () =>
+  Object.keys(exampleFiles).map((path) => ({
+    slug: path.replace("../", "").replace(".svelte", "")
+  }));
 
 export const load: PageLoad = async ({ params }) => {
   // Basic slug validation to prevent path traversal

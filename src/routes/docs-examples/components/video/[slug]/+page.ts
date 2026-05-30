@@ -1,5 +1,7 @@
-import type { PageLoad } from "./$types";
+import type { PageLoad, EntryGenerator } from "./$types";
 import { error } from "@sveltejs/kit";
+
+export const entries: EntryGenerator = () => [{ slug: "Autoplay" }, { slug: "Custom" }, { slug: "Default" }, { slug: "Height" }, { slug: "Muted" }, { slug: "Responsive" }, { slug: "Width" }];
 
 export const load: PageLoad = async ({ params }) => {
   // Basic slug validation to prevent path traversal

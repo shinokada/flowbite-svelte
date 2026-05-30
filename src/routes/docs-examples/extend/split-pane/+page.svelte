@@ -279,7 +279,7 @@
                   <span class="bg-brand-softer text-fg-brand ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full p-3 text-sm font-medium">3</span>
                 {/snippet}
               </SidebarItem>
-              <SidebarItem label="Sidebar" href="/components/sidebar">
+              <SidebarItem label="Sidebar" href="/docs/components/sidebar">
                 {#snippet icon()}
                   <UserSolid class="text-body group-hover:text-heading inline h-5 w-5 transition duration-75" />
                 {/snippet}

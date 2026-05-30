@@ -1,13 +1,13 @@
-const json = (r: Response) => r.json();
-// export const prerender = true;
 import type { PageServerLoad } from "./$types";
+import { fetchMarkdownPosts, fetchBuilders, fetchBlocksMarkdownPosts, fetchDashboardPosts } from "../../utils";
 
-export const load: PageServerLoad = async ({ fetch }) => {
+export const prerender = false;
+
+export const load: PageServerLoad = async () => {
   try {
-    const posts = await fetch("/api/posts").then(json);
-    // console.log('posts: ', posts);
-    return { posts };
+    const [posts, blocks, builders, dashboard] = await Promise.all([fetchMarkdownPosts(), fetchBlocksMarkdownPosts(), fetchBuilders(), fetchDashboardPosts()]);
+    return { posts: { posts, blocks, builders, dashboard } };
   } catch (error) {
-    console.error(`Error in load function for /: ${error}`);
+    console.error(`Error in load function for /admin-dashboard: ${error}`);
   }
 };
