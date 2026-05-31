@@ -3,6 +3,7 @@ import { error } from "@sveltejs/kit";
 import type { RequestHandler } from "@sveltejs/kit";
 import * as docs from "./docs";
 
+export const prerender = true;
 export const GET: RequestHandler = async () => {
   let docsSlugs;
   try {
