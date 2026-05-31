@@ -1,6 +1,6 @@
 import { fetchMarkdownPosts, fetchBuilders, fetchBlocksMarkdownPosts, fetchDashboardPosts } from "../utils";
 
-// export const prerender = true;
+export const prerender = true;
 
 /** @type {import('./$types').LayoutLoad} */
 export const load = async () => {
