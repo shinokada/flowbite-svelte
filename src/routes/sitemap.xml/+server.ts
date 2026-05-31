@@ -23,7 +23,7 @@ export const GET: RequestHandler = async () => {
       "^/fonts.*",
       "^/_testdir.*",
       "^/layouts/component.*",
-      "^/admin-dashboard/.*/\\[.*\\].*" // Exclude any dynamic routes in admin-dashboard
+      "^/admin-dashboard/errors.*" // Exclude error pages (prerender = false)
     ],
     paramValues: {
       "/docs/pages/[slug]": docsSlugs["pages"] || [],
@@ -37,7 +37,17 @@ export const GET: RequestHandler = async () => {
       "/illustrations/[slug]": docsSlugs["illustrations"] || [],
       "/blocks/application/[slug]": docsSlugs["blocks-application"] || [],
       "/blocks/marketing/[slug]": docsSlugs["blocks-marketing"] || [],
-      "/blocks/publisher/[slug]": docsSlugs["blocks-publisher"] || []
+      "/blocks/publisher/[slug]": docsSlugs["blocks-publisher"] || [],
+      // admin-dashboard dynamic routes
+      "/admin-dashboard/authentication/[slug]": [
+        "forgot-password",
+        "profile-lock",
+        "reset-password",
+        "sign-in",
+        "sign-up"
+      ],
+      "/admin-dashboard/pages/[slug]": ["404", "500", "maintenance"],
+      "/admin-dashboard/components/[slug]": ["product-drawer"]
     },
     additionalPaths: docsSlugs["dashboard"]?.map((route) => `/${route}`) || []
   });
